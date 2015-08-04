@@ -32,6 +32,6 @@ setup(
     long_description=long_description,
     name='pixelscan',
     packages=find_packages(exclude=['tests']),
-    url='https://github.com/dpmcmlxxvi/pixelscan/tarball/0.1.0',
+    url='https://github.com/dpmcmlxxvi/pixelscan/tarball/v0.1.0',
     version='0.1.0',
 )
