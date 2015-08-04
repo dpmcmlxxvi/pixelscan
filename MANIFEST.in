@@ -1,0 +1,4 @@
+include README.rst
+include DESCRIPTION.rst
+recursive-include pixelscan *
+global-exclude *~ *.pyc
