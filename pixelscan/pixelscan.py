@@ -439,7 +439,7 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
     # Validate inputs
     if r1 < 0: raise ValueError("Initial radius must be non-negative")
     if r2 < 0: raise ValueError("Final radius must be non-negative")
-    if not hasattr(metric, "__call__"): raise TypeError("Metric is not callable")
+    if not hasattr(metric, "__call__"): raise TypeError("Metric not callable")
 
     # Define counter-clockwise step directions
     direction = 0
