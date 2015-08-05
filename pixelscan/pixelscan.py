@@ -15,9 +15,10 @@ standard transformations (e.g., rotation, scale, translation) on the
 coordinates.
 """
 
+from sys import maxint
+
 import math
 import random
-import sys
 
 # ======================================================================
 # Distance metrics
@@ -46,6 +47,55 @@ def manhattan(point1, point2):
 # ======================================================================
 # Scan transformations
 # ----------------------------------------------------------------------
+
+class clip:
+    """
+    Clip coordinates that exceed boundary
+    """
+    def __init__(self,
+                 scan,
+                 minx=-maxint,
+                 maxx=maxint,
+                 miny=-maxint,
+                 maxy=maxint,
+                 predicate=None,
+                 abort=False):
+
+        """
+        :param scan: Pixel scan generator
+        :param minx: Minimum x-coordinate (default = -sys.maxint)
+        :param maxx: Maximum x-coordinate (default =  sys.maxint)
+        :param miny: Minimum y-coordinate (default = -sys.maxint)
+        :param maxy: Maximum y-coordinate (default =  sys.maxint)
+        :param predicate: Optional function that takes 2 arguments (x and y)
+                          and returns true if coordinate should be kept
+                          otherwise false (default = None)
+        :param abort: Abort iteration is boundary is crossed
+        """
+        self.scan = scan
+        self.minx = minx
+        self.maxx = maxx
+        self.miny = miny
+        self.maxy = maxy
+        self.predicate = predicate
+        self.abort = abort
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        while True:
+            x, y = next(self.scan)
+            if self.predicate is not None and not self.predicate(x,y):
+                if self.abort: raise StopIteration("Boundary crossed!")
+                continue
+            if (x < self.minx or
+                x > self.maxx or
+                y < self.miny or
+                y > self.maxy):
+                if self.abort: raise StopIteration("Boundary crossed!")
+                continue
+            return x, y
 
 class reflection:
     """
@@ -151,7 +201,7 @@ class skip:
     """
     Skip points at the given step size
     """
-    def __init__(self, scan, start=0, stop=sys.maxint, step=1):
+    def __init__(self, scan, start=0, stop=maxint, step=1):
         """
         :param scan: Pixel scan generator
         :param start: Iteration starting 0-based index (default = 0)

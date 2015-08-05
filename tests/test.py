@@ -118,6 +118,32 @@ class TestPixelscan(unittest.TestCase):
             self.assertEqual(point, truth[index])
         self.assertEqual(index+1, len(truth))
 
+    def test_snakescan_clip(self):
+        truth = [(2,1), (1,1), (1,2), (2,2)]
+        x0, y0, x1, y1 = 0, 0, 2, 2
+        points = clip(snakescan(x0, y0, x1, y1), minx=1, miny=1)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
+    def test_snakescan_clip_abort(self):
+        truth = [(0,0), (1,0), (2,0), (2,1), (1,1), (0,1)]
+        x0, y0, x1, y1 = 0, 0, 2, 2
+        points = clip(snakescan(x0, y0, x1, y1), maxy=1, abort=True)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
+    def test_snakescan_clip_predicate(self):
+        def predicate(x, y):
+            return True if y >= 1 else False
+        truth = [(2,1), (1,1), (0,1), (0,2), (1,2), (2,2)]
+        x0, y0, x1, y1 = 0, 0, 2, 2
+        points = clip(snakescan(x0, y0, x1, y1), predicate=predicate)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
     def test_snakescan_skip(self):
         truth = [(0,0), (2,0), (1,1), (0,2), (2,2)]
         x0, y0, x1, y1 = 0, 0, 2, 2
