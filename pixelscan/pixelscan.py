@@ -225,7 +225,7 @@ class skip:
             x, y = next(self.scan)
             self.index += 1
             if (self.index < self.start): continue
-            if (self.index > self.stop): continue
+            if (self.index > self.stop): raise StopIteration("skip stopping")
             if ((self.index-self.start) % self.step != 0): continue
             return x, y
 
@@ -522,3 +522,55 @@ def snakescan(xi, yi, xf, yf):
         if x == xa or x == xb:
             dx *= -1
             xa, xb = xb, xa
+
+def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
+    """
+    Scan pixels in a random walk pattern with given step probabilities
+    :param x0: Initial x coordinate
+    :param y0: Initial y coordinate
+    :param xn: Probability of moving in the positive x direction
+    :param xp: Probability of moving in the positive x direction
+    :param yn: Probability of moving in the positive y direction
+    :param yp: Probability of moving in the positive y direction
+    :warning: The random walk will continue indefinitely unless a skip
+              transformation is used with the 'stop' parameter set or
+              a clip transformation is used with the 'abort' parameters set
+              to True. The probabilities are normalized to sum to 1.
+    """
+
+    # Validate inputs
+    if xn < 0: raise ValueError("Negative x probabilty must be non-negative")
+    if xp < 0: raise ValueError("Positive x probabilty must be non-negative")
+    if yn < 0: raise ValueError("Negative y probabilty must be non-negative")
+    if yp < 0: raise ValueError("Positive y probabilty must be non-negative")
+
+    # Compute normalized probability
+    total = xp + xn + yp + yn
+    xn /= total
+    xp /= total
+    yn /= total
+    yp /= total
+
+    # Compute cumulative probability
+    cxn = xn
+    cxp = cxn + xp
+    cyn = cxp + yn
+    cyp = cyn + yp
+
+    # Initialize position
+    x, y = x0, y0
+
+    while True:
+
+        yield x, y
+
+        # Take random step
+        probability = random.random()
+        if probability <= cxn:
+            x -= 1
+        elif probability <= cxp:
+            x += 1
+        elif probability <= cyn:
+            y -= 1
+        else:
+            y += 1

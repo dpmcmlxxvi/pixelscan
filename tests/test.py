@@ -194,5 +194,23 @@ class TestPixelscan(unittest.TestCase):
             self.assertEqual(point, truth[index])
         self.assertEqual(index+1, len(truth))
 
+    def test_walkscan_abort(self):
+        random.seed(0)
+        truth =[(0,0), (0,1), (0,2), (1,2), (2,2), (2,1), (3,1), (3,2)]
+        x0, y0 = 0, 0
+        points = clip(walkscan(x0, y0), maxx=3, abort=True)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
+    def test_walkscan_skip(self):
+        random.seed(0)
+        truth =[(0,0), (0,1), (0,2), (1,2), (2,2), (2,1), (3,1), (3,2), (4,2)]
+        x0, y0 = 0, 0
+        points = skip(walkscan(x0, y0), stop=8)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
 if __name__ == "__main__":
     unittest.main()
