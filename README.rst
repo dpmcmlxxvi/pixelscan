@@ -59,11 +59,15 @@ The following are the currently available generators
 - **gridscan**
    Generates pixels in rectangular grid pattern
 - **randomscan**
-   Generates pixels in a random pattern within a grid
+   Generates pixels in a random pattern within a grid using random binning
+- **reservoirscan**
+   Generates pixels in a random pattern within a grid using reservoir sampling
 - **ringscan**
    Generates pixels in a ring pattern (squares or diamonds)
 - **snakescan**
-   Generates pixels by in a snake pattern along the x then y axis
+   Generates pixels in a snake pattern along the x then y axis
+- **walkscan**
+   Generates pixels in a random pattern using a random walk
 
 **************************
 Coordinate Transformations
@@ -71,6 +75,8 @@ Coordinate Transformations
 
 The following are the currentl available transformations
 
+- **clip**
+   Clips the coordinates at the given boundary
 - **reflection**
    Reflects the coordinates along the x and/or y axis
 - **rotation**
