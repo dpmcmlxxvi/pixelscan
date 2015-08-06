@@ -425,6 +425,50 @@ def randomscan(xi, yi, xf, yf, npoints):
         y = yi + index / nx
         yield x, y
 
+def reservoirscan(xi, yi, xf, yf, npoints):
+    """
+    Scan pixels in a region in a random pattern using reservoir sampling.
+    :param xi: Initial x coordinate
+    :param yi: Initial y coordinate
+    :param xf: Final x coordinate
+    :param yf: Final y coordinate
+    :param npoints: Sample size
+    :returns: Coordinate generator
+    :warning: This is only useful if you need exactly 'npoints' sampled.
+              Otherwise use the 'sample' transformation to randomly sample
+              at a given rate. This method requires storing npoints in
+              memory and precomputing the random selection so it may be
+              slower than 'randomscan'. However, its results will be better
+              randomly distributed.
+    """
+
+    # Validate inputs
+    if npoints <= 0: raise ValueError("Sample size must be positive")
+
+    # Partition then entire range of unwrapped indexes into bins and then
+    # pick a random pixel in each bin
+    nx = xf - xi + 1
+    ny = yf - yi + 1
+    npixels = nx * ny
+
+    # Initialize reservoir
+    npoints = min(npoints, npixels)
+    reservoir = [p for p in range(npoints)]
+    random.shuffle(reservoir)
+
+    # Randomly select elements from remaining points in region and swap with
+    # a reservoir entry
+    for i in range(npoints, npixels):
+        j = random.randint(0, i)
+        if j < npoints:
+            reservoir[j] = i
+
+    for index in reservoir:
+        # Convert point from unwrapped index to x-y coordinate
+        x = xi + index % nx
+        y = yi + index / nx
+        yield x, y
+
 def ringscan(x0, y0, r1, r2, metric=chebyshev):
     """
     Scan pixels in a ring pattern around a center point counter-clockwise

@@ -82,6 +82,15 @@ class TestPixelscan(unittest.TestCase):
             self.assertEqual(point, truth[index])
         self.assertEqual(index+1, len(truth))
 
+    def test_reservoirscan(self):
+        random.seed(0)
+        truth = [(2,0), (0,0), (2,4), (1,2), (4,2)]
+        x0, y0, x1, y1, npoints = 0, 0, 5, 5, 5
+        points = reservoirscan(x0, y0, x1, y1, npoints)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
     def test_ringscan_chebyshev(self):
         truth = [(0,0), (0,1), (1,1), (1,0), (1,-1), (0,-1), (-1,-1), (-1,0),\
                 (-1,1), (0,2), (1,2), (2,2), (2,1), (2,0), (2,-1), (2,-2),\
