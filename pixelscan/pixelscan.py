@@ -118,6 +118,49 @@ class reflection:
         x, y = next(self.scan)
         return -x if self.rx else x, -y if self.ry else y
 
+class reservoir:
+
+    def __init__(self, scan, npoints):
+        """
+        Randomly sample points using the reservoir sampling method.
+        :param scan: Pixel scan generator
+        :param npoints: Sample size
+        :warning: This is only useful if you need exactly 'npoints' sampled.
+                  Otherwise use the 'sample' transformation to randomly sample
+                  at a given rate. This method requires storing 'npoints' in
+                  memory and precomputing the random selection so it may be
+                  slower than 'sample'.
+        """
+        # Validate inputs
+        if npoints <= 0: raise ValueError("Sample size must be positive")
+
+        self.reservoir = []
+        self.count = 0
+
+        # Populate reservoir
+        for index, point in enumerate(scan):
+            if index < npoints:
+                self.reservoir.append(point)
+            else:
+                j = random.randint(0, index)
+                if j < npoints:
+                    self.reservoir[j] = point
+
+        # Shuffle the reservoir in case population was small and the
+        # points were not sufficiently randomized
+        random.shuffle(self.reservoir)
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+
+        if self.count < len(self.reservoir):
+            self.count += 1
+            return self.reservoir[self.count-1]
+
+        raise StopIteration("Reservoir exhausted")
+
 class rotation:
     """
     Rotate coordinates by given angle
@@ -386,88 +429,6 @@ def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
     for y in range(yi, yf + dy, dy):
         for x in range(xi, xf + dx, dx):
             yield x, y
-
-def randomscan(xi, yi, xf, yf, npoints):
-    """
-    Scan pixels in a region in a random pattern. This is only useful if you
-    need exactly 'npoints' sampled. Otherwise use the 'sample'
-    transformation to randomly sample at a given rate.
-    :param xi: Initial x coordinate
-    :param yi: Initial y coordinate
-    :param xf: Final x coordinate
-    :param yf: Final y coordinate
-    :param npoints: Sample size
-    :returns: Coordinate generator
-    """
-
-    # Validate inputs
-    if npoints <= 0: raise ValueError("Sample size must be positive")
-
-    # Partition then entire range of unwrapped indexes into bins and then
-    # pick a random pixel in each bin
-    nx = xf - xi + 1
-    ny = yf - yi + 1
-    npixels = nx * ny
-    binsize = min(npixels, max(1, int(npixels / npoints)))
-
-    for point in range(0, npoints):
-
-        # Wrap index if oversampling pixels
-        point = point % npixels
-
-        # Compute random index
-        pi = point * binsize
-        pf = (point + 1) * binsize - 1 if point < npoints-1 else npixels-1
-        index = random.randint(pi, pf)
-
-        # Convert point from unwrapped index to x-y coordinate
-        x = xi + index % nx
-        y = yi + index / nx
-        yield x, y
-
-def reservoirscan(xi, yi, xf, yf, npoints):
-    """
-    Scan pixels in a region in a random pattern using reservoir sampling.
-    :param xi: Initial x coordinate
-    :param yi: Initial y coordinate
-    :param xf: Final x coordinate
-    :param yf: Final y coordinate
-    :param npoints: Sample size
-    :returns: Coordinate generator
-    :warning: This is only useful if you need exactly 'npoints' sampled.
-              Otherwise use the 'sample' transformation to randomly sample
-              at a given rate. This method requires storing npoints in
-              memory and precomputing the random selection so it may be
-              slower than 'randomscan'. However, its results will be better
-              randomly distributed.
-    """
-
-    # Validate inputs
-    if npoints <= 0: raise ValueError("Sample size must be positive")
-
-    # Partition then entire range of unwrapped indexes into bins and then
-    # pick a random pixel in each bin
-    nx = xf - xi + 1
-    ny = yf - yi + 1
-    npixels = nx * ny
-
-    # Initialize reservoir
-    npoints = min(npoints, npixels)
-    reservoir = [p for p in range(npoints)]
-    random.shuffle(reservoir)
-
-    # Randomly select elements from remaining points in region and swap with
-    # a reservoir entry
-    for i in range(npoints, npixels):
-        j = random.randint(0, i)
-        if j < npoints:
-            reservoir[j] = i
-
-    for index in reservoir:
-        # Convert point from unwrapped index to x-y coordinate
-        x = xi + index % nx
-        y = yi + index / nx
-        yield x, y
 
 def ringscan(x0, y0, r1, r2, metric=chebyshev):
     """

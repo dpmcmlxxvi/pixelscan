@@ -54,45 +54,50 @@ Scan Generators
 
 The following are the currently available generators
 
-- **circlescan**
-   Generates pixels in a counter-clockwise circular pattern
-- **gridscan**
-   Generates pixels in rectangular grid pattern
-- **randomscan**
-   Generates pixels in a random pattern within a grid using random binning
-- **reservoirscan**
-   Generates pixels in a random pattern within a grid using reservoir sampling
-- **ringscan**
-   Generates pixels in a ring pattern (squares or diamonds)
-- **snakescan**
-   Generates pixels in a snake pattern along the x then y axis
-- **walkscan**
-   Generates pixels in a random pattern using a random walk
++----------+-----------------------------------------------------------+
+|   Name   | Description                                               |
++==========+===========================================================+
+|circlescan|Generates pixels in a counter-clockwise circular pattern   |
++----------+-----------------------------------------------------------+
+|  gridscan|Generates pixels in rectangular grid pattern               |
++----------+-----------------------------------------------------------+
+|  ringscan|Generates pixels in a ring pattern (squares or diamonds)   |
++----------+-----------------------------------------------------------+
+|  snakecan|Generates pixels in a snake pattern along the x then y axis|
++----------+-----------------------------------------------------------+
+|  walkscan|Generates pixels in a random pattern using a random walk   |
++----------+-----------------------------------------------------------+
 
 **************************
 Coordinate Transformations
 **************************
 
-The following are the currentl available transformations
+The following are the currently available transformations
 
-- **clip**
-   Clips the coordinates at the given boundary
-- **reflection**
-   Reflects the coordinates along the x and/or y axis
-- **rotation**
-   Rotates the coordinates about the origin
-- **sample**
-   Randomly samples the pixels with a given probability
-- **scale**
-   Scales the coordinates with a given scale factors
-- **skip**
-   Skips the pixels with the given step size
-- **snap**
-   Snap the x and y coordinates to a grid point
-- **swap**
-   Swap the x and y coordinates
-- **translation**
-   Translates the coordinates by the given offsets
++-----------+-----------------------------------------------------------+
+|    Name   | Description                                               |
++===========+===========================================================+
+|       clip|Clips the coordinates at the given boundary                |
++-----------+-----------------------------------------------------------+
+| reflection|Reflects the coordinates along the x and/or y axis         |
++-----------+-----------------------------------------------------------+
+|  reservoir|Randomly samples the pixels using reservoir sampling       |
++-----------+-----------------------------------------------------------+
+|   rotation|Rotates the coordinates about the origin                   |
++-----------+-----------------------------------------------------------+
+|     sample|Randomly samples the pixels with a given probability       |
++-----------+-----------------------------------------------------------+
+|      scale|Scales the coordinates with a given scale factors          |
++-----------+-----------------------------------------------------------+
+|       skip|Skips the pixels with the given step size                  |
++-----------+-----------------------------------------------------------+
+|       snap|Snap the x and y coordinates to a grid point               |
++-----------+-----------------------------------------------------------+
+|       swap|Swap the x and y coordinates                               |
++-----------+-----------------------------------------------------------+
+|translation|Translates the coordinates by the given offsets            |
++-----------+-----------------------------------------------------------+
+
 
 ***************
 Warnings
