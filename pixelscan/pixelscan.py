@@ -253,6 +253,7 @@ class skip:
         """
         if start < 0: raise ValueError("Start must be non-negative")
         if stop < 0: raise ValueError("Stop must be non-negative")
+        if stop < start: raise ValueError("Stop must be greater than start")
         if step <= 0: raise ValueError("Step must be positive")
         self.scan = scan
         self.start = start
