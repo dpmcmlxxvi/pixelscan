@@ -15,10 +15,9 @@ standard transformations (e.g., rotation, scale, translation) on the
 coordinates.
 """
 
-from sys import maxint
-
 import math
 import random
+import sys
 
 # ======================================================================
 # Distance metrics
@@ -54,10 +53,10 @@ class clip:
     """
     def __init__(self,
                  scan,
-                 minx=-maxint,
-                 maxx=maxint,
-                 miny=-maxint,
-                 maxy=maxint,
+                 minx=-sys.maxint,
+                 maxx=sys.maxint,
+                 miny=-sys.maxint,
+                 maxy=sys.maxint,
                  predicate=None,
                  abort=False):
 
@@ -116,7 +115,9 @@ class reflection:
 
     def next(self):
         x, y = next(self.scan)
-        return -x if self.rx else x, -y if self.ry else y
+        xr = -x if self.rx else x
+        yr = -y if self.ry else y
+        return xr, yr
 
 class reservoir:
 
@@ -244,7 +245,7 @@ class skip:
     """
     Skip points at the given step size
     """
-    def __init__(self, scan, start=0, stop=maxint, step=1):
+    def __init__(self, scan, start=0, stop=sys.maxint, step=1):
         """
         :param scan: Pixel scan generator
         :param start: Iteration starting 0-based index (default = 0)
@@ -385,8 +386,8 @@ def circlescan(x0, y0, r1, r2):
                 y = distance
                 d = 1 - distance
                 while x < y:
-                    xr = rotations[angle][0][0] * x + rotations[angle][0][1] * y
-                    yr = rotations[angle][1][0] * x + rotations[angle][1][1] * y
+                    xr = rotations[angle][0][0]*x + rotations[angle][0][1]*y
+                    yr = rotations[angle][1][0]*x + rotations[angle][1][1]*y
                     xr = x0 + xr
                     yr = y0 + yr
                     
@@ -534,13 +535,13 @@ def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
     Scan pixels in a random walk pattern with given step probabilities
     :param x0: Initial x coordinate
     :param y0: Initial y coordinate
-    :param xn: Probability of moving in the positive x direction
+    :param xn: Probability of moving in the negative x direction
     :param xp: Probability of moving in the positive x direction
-    :param yn: Probability of moving in the positive y direction
+    :param yn: Probability of moving in the negative y direction
     :param yp: Probability of moving in the positive y direction
     :warning: The random walk will continue indefinitely unless a skip
               transformation is used with the 'stop' parameter set or
-              a clip transformation is used with the 'abort' parameters set
+              a clip transformation is used with the 'abort' parameter set
               to True. The probabilities are normalized to sum to 1.
     """
 
