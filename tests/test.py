@@ -11,7 +11,7 @@
 Test the various methods to scan grid points
 """
 
-from pixelscan import *
+from pixelscan.pixelscan import *
 
 import unittest
 
