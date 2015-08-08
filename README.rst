@@ -5,6 +5,9 @@ pixelscan
 .. image:: https://travis-ci.org/dpmcmlxxvi/pixelscan.svg?branch=master
     :target: https://travis-ci.org/dpmcmlxxvi/pixelscan
 
+.. image:: http://codecov.io/github/dpmcmlxxvi/pixelscan/coverage.svg?branch=master
+    :target: http://codecov.io/github/dpmcmlxxvi/pixelscan?branch=master
+
 The **pixelscan** library provides functions to scan pixels on a grid in a
 variety of spatial patterns. The library consists of scan generators and
 coordinate transformations. Scan generators are Python generators that return
