@@ -8,3 +8,11 @@ script:
   - coverage run tests/test.py
 after_success:
   - codecov --token $CODECOV_TOKEN
+deploy:
+  provider: pypi
+  user: dpmcmlxxvi
+  password:
+    secure: UZ3ZOSFFpcmTfMnoFYh/KUIeQLGxvZpGH07sCBiblHfUtECpiq7FJ00GvyjNMqgjcxZm+THZJoGuPKgtfLsIX8qiarXNoht1yQ6dVuPzINocSMOi4bOW56d3x1XNo6WkYsyZrusp62CoP51fyM77uTrBrK/5wro0DnWTh6jlsP4tw+lx2S+KffgeYOiNf34Ck1vHMsMDmTTFXg6hwXZlFOhWGrHwcvWWH0iUmk3BkYGxALXawz19t2VudQQcpZnXKEZjFaijqr+pFhhhYVa/qMrJ/8QjVnm+Q2gctKEuPYicUvtAsL/fao4kVOpw+ls2e0zzWjmOLT7nMmoe2xSd6Cb/fgb50mUHEv6dOhcvFff2pOdPwUNms91Jzw5KvXbgVHOUqTmEG06bRKLmLHHLTf0r4QG7vghjdVDvJ/C6RxZcwOKGjTEAZ0wgK2GNZ7NwOTVJ85Bj8ddJd5Sz+9Hs4620lFo18K3AM7oWBD1QBCOSVXnYha5/Y7sOJQ1P4HevtC+RZCrEjE6RIif479PVxFvHrmrExEK+fneYLW9RkQ2UnySXgua0Cn20mFzSx+F8Fso3oW7xwiT9KXpZrHrpwPujsn0PSiZDlCfntkcy22ccYcO9z7xT5kttJh+6VAnuG3fGGzAN5Y4O2RLahS7c7zfgeBcIYT6RxknCTs30ZyI=
+  on:
+    tags: true
+    repo: dpmcmlxxvi/pixelscan
