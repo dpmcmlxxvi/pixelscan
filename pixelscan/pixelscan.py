@@ -87,14 +87,13 @@ class clip:
             x, y = next(self.scan)
             if self.predicate is not None and not self.predicate(x,y):
                 if self.abort: raise StopIteration("Boundary crossed!")
-                continue
-            if (x < self.minx or
+            elif (x < self.minx or
                 x > self.maxx or
                 y < self.miny or
                 y > self.maxy):
                 if self.abort: raise StopIteration("Boundary crossed!")
-                continue
-            return x, y
+            else:
+                return x, y
 
 class reflection:
     """

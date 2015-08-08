@@ -57,6 +57,20 @@ class TestPixelscan(unittest.TestCase):
             self.assertEqual(point, truth[index])
         self.assertEqual(index+1, len(truth))
 
+    def test_gridscan_sample_exception(self):
+        x0, y0, x1, y1 = 0, 0, 2, 2
+        with self.assertRaises(ValueError):
+            points = sample(gridscan(x0, y0, x1, y1), probability=2)
+
+    def test_gridscan_sample_all(self):
+        random.seed(0)
+        truth = [(0,0), (1,0), (2,0), (0,1), (1,1), (2,1), (0,2), (1,2), (2,2)]
+        x0, y0, x1, y1 = 0, 0, 2, 2
+        points = sample(gridscan(x0, y0, x1, y1), probability=1)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
     def test_gridscan_skip(self):
         truth = [(1,0), (0,1)]
         x0, y0, x1, y1 = 0, 0, 2, 2
@@ -78,6 +92,16 @@ class TestPixelscan(unittest.TestCase):
         truth = [(0,0), (0,5), (2,1), (1,0), (4,1)]
         x0, y0, x1, y1, npoints = 0, 0, 5, 5, 5
         points = reservoir(gridscan(x0, y0, x1, y1), npoints)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
+    def test_ringscan_badmetric(self):
+        def badmetric(x, y):
+            return 3
+        truth = [(0,0)]
+        x0, y0, r1, r2 = 0, 0, 0, 2
+        points = ringscan(x0, y0, r1, r2, metric=badmetric)
         for index, point in enumerate(points):
             self.assertEqual(point, truth[index])
         self.assertEqual(index+1, len(truth))
@@ -144,6 +168,15 @@ class TestPixelscan(unittest.TestCase):
             self.assertEqual(point, truth[index])
         self.assertEqual(index+1, len(truth))
 
+    def test_snakescan_clip_predicate_abort(self):
+        def predicate(x, y):
+            return True if y >= 1 else False
+        truth = []
+        x0, y0, x1, y1 = 0, 0, 2, 2
+        points = clip(snakescan(x0, y0, x1, y1), predicate=predicate, abort=True)
+        npoints = len([point for point in enumerate(points)])
+        self.assertEqual(npoints, len(truth))
+
     def test_snakescan_skip(self):
         truth = [(0,0), (2,0), (1,1), (0,2), (2,2)]
         x0, y0, x1, y1 = 0, 0, 2, 2
@@ -170,6 +203,17 @@ class TestPixelscan(unittest.TestCase):
         self.assertEqual(index+1, len(truth))
 
     def test_snakescan_rotation(self):
+        truth = [(0,0), (0,1), (0,2), (-1,2), (-1,1), (-1,0), (-2,0), (-2,1),\
+                (-2,2)]
+        x0, y0, x1, y1 = 0, 0, 2, 2
+        points = rotation(snakescan(x0, y0, x1, y1), angle=90)
+        for index, point in enumerate(points):
+            x = int(round(point[0]))
+            y = int(round(point[1]))
+            self.assertEqual((x,y), truth[index])
+        self.assertEqual(index+1, len(truth))
+
+    def test_snakescan_rotation_snap(self):
         truth = [(0,0), (0,1), (0,2), (-1,2), (-1,1), (-1,0), (-2,0), (-2,1),\
                 (-2,2)]
         x0, y0, x1, y1 = 0, 0, 2, 2
@@ -204,8 +248,9 @@ class TestPixelscan(unittest.TestCase):
         self.assertEqual(index+1, len(truth))
 
     def test_walkscan_skip(self):
-        random.seed(0)
-        truth =[(0,0), (0,1), (0,2), (1,2), (2,2), (2,1), (3,1), (3,2), (4,2)]
+        random.seed(1)
+        truth =[(0,0), (-1,0), (-1,1), (-1,2), (0,2), (1,2), (2,2), (2,1),\
+                (2,2)]
         x0, y0 = 0, 0
         points = skip(walkscan(x0, y0), stop=8)
         for index, point in enumerate(points):
