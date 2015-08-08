@@ -16,6 +16,18 @@ are iterators that apply spatial transformations to the coordinates created by
 the scan generators. Transformation can be chained to yield very generic
 transformations.
 
++----------+------------------------------------------------+
+| Source   | https://github.com/dpmcmlxxvi/pixelscan        |
++----------+------------------------------------------------+
+| Package  | https://pypi.python.org/pypi/pixelscan         |
++----------+------------------------------------------------+
+| Testing  | https://travis-ci.org/dpmcmlxxvi/pixelscan     |
++----------+------------------------------------------------+
+| Coverage | https://codecov.io/github/dpmcmlxxvi/pixelscan |
++----------+------------------------------------------------+
+| License  | http://opensource.org/licenses/MIT             |
++----------+------------------------------------------------+
+
 ***************
 Usage
 ***************
