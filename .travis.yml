@@ -7,4 +7,4 @@ script:
   - python setup.py install
   - coverage run tests/test.py
 after_success:
-  - codecov
+  - codecov --token $CODECOV_TOKEN
