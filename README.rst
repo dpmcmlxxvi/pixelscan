@@ -27,7 +27,7 @@ The typical calling syntax is
    for x, y in transformation(generator(...), ...):
       foo(x,y)
 
-For example, the following scans pixels in a counter-clockwise circular pattern
+For example, the following scans pixels in a clockwise circular pattern
 from the origin up to a radius of 1
 
 .. code-block:: python
@@ -63,7 +63,7 @@ The following are the currently available generators
 +----------+-----------------------------------------------------------+
 |   Name   | Description                                               |
 +==========+===========================================================+
-|circlescan|Generates pixels in a counter-clockwise circular pattern   |
+|circlescan|Generates pixels in a clockwise circular pattern           |
 +----------+-----------------------------------------------------------+
 |  gridscan|Generates pixels in rectangular grid pattern               |
 +----------+-----------------------------------------------------------+
@@ -89,7 +89,7 @@ The following are the currently available transformations
 +-----------+-----------------------------------------------------------+
 |  reservoir|Randomly samples the pixels using reservoir sampling       |
 +-----------+-----------------------------------------------------------+
-|   rotation|Rotates the coordinates about the origin                   |
+|   rotation|Rotates the coordinates about the origin counter-clockwise |
 +-----------+-----------------------------------------------------------+
 |     sample|Randomly samples the pixels with a given probability       |
 +-----------+-----------------------------------------------------------+

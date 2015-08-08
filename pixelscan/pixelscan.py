@@ -10,7 +10,7 @@
 """
 Various patterns to scan pixels on a grid. Rectangular patterns are scanned
 first along the x-coordinate then the y-coordinate. Radial patterns are
-scanned counter-clockwise. Transformation filters are available to apply
+scanned clockwise. Transformation filters are available to apply
 standard transformations (e.g., rotation, scale, translation) on the
 coordinates.
 """
@@ -433,7 +433,7 @@ def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
 
 def ringscan(x0, y0, r1, r2, metric=chebyshev):
     """
-    Scan pixels in a ring pattern around a center point counter-clockwise
+    Scan pixels in a ring pattern around a center point clockwise
     :param x0: Center x-coordinate
     :param y0: Center y-coordinate
     :param r1: Initial radius
@@ -447,7 +447,7 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
     if r2 < 0: raise ValueError("Final radius must be non-negative")
     if not hasattr(metric, "__call__"): raise TypeError("Metric not callable")
 
-    # Define counter-clockwise step directions
+    # Define clockwise step directions
     direction = 0
     steps = {0: [ 1, 0],
              1: [ 1,-1],
