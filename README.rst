@@ -4,16 +4,19 @@ pixelscan
 
 .. image:: https://travis-ci.org/dpmcmlxxvi/pixelscan.svg?branch=master
     :target: https://travis-ci.org/dpmcmlxxvi/pixelscan
+    :alt: Code Status
 
 .. image:: https://coveralls.io/repos/dpmcmlxxvi/pixelscan/badge.svg?branch=master&service=github
     :target: https://coveralls.io/github/dpmcmlxxvi/pixelscan?branch=master
+    :alt: Code Coverage
 
 .. image:: https://landscape.io/github/dpmcmlxxvi/pixelscan/master/landscape.svg?style=flat
     :target: https://landscape.io/github/dpmcmlxxvi/pixelscan/master
     :alt: Code Health
 
 .. image:: https://badge.fury.io/py/pixelscan.svg
-    :target: http://badge.fury.io/py/pixelscan
+    :target: https://pypi.python.org/pypi/pixelscan
+    :alt: Code Package
 
 The **pixelscan** library provides functions to scan pixels on a grid in a
 variety of spatial patterns. The library consists of scan generators and
@@ -22,18 +25,6 @@ pixel coordinates in a particular spatial pattern. Coordinate transformations
 are iterators that apply spatial transformations to the coordinates created by
 the scan generators. Transformation can be chained to yield very generic
 transformations.
-
-+----------+--------------------------------------------------+
-| Source   | https://github.com/dpmcmlxxvi/pixelscan          |
-+----------+--------------------------------------------------+
-| Package  | https://pypi.python.org/pypi/pixelscan           |
-+----------+--------------------------------------------------+
-| Testing  | https://travis-ci.org/dpmcmlxxvi/pixelscan       |
-+----------+--------------------------------------------------+
-| Coverage | https://coveralls.io/github/dpmcmlxxvi/pixelscan |
-+----------+--------------------------------------------------+
-| License  | http://opensource.org/licenses/MIT               |
-+----------+--------------------------------------------------+
 
 ***************
 Usage
