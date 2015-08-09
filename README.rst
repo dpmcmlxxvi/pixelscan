@@ -128,5 +128,12 @@ They can be snapped to a grid point using the **snap** transformation.
 Changelog
 ***************
 
+- v0.2.0
+    - Add clip transformation
+    - Add random walk generator
+    - Replace random generators with reservoir transformation
+    - Add continous integration and testing
+    - Add automated deployment 
+
 - v0.1.0
-   Initial release
+   - Initial release
