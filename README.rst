@@ -6,7 +6,14 @@ pixelscan
     :target: https://travis-ci.org/dpmcmlxxvi/pixelscan
 
 .. image:: https://coveralls.io/repos/dpmcmlxxvi/pixelscan/badge.svg?branch=master&service=github
-  :target: https://coveralls.io/github/dpmcmlxxvi/pixelscan?branch=master
+    :target: https://coveralls.io/github/dpmcmlxxvi/pixelscan?branch=master
+
+.. image:: https://landscape.io/github/dpmcmlxxvi/pixelscan/master/landscape.svg?style=flat
+    :target: https://landscape.io/github/dpmcmlxxvi/pixelscan/master
+    :alt: Code Health
+
+.. image:: https://badge.fury.io/py/pixelscan.svg
+    :target: http://badge.fury.io/py/pixelscan
 
 The **pixelscan** library provides functions to scan pixels on a grid in a
 variety of spatial patterns. The library consists of scan generators and
