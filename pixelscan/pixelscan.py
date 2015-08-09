@@ -47,7 +47,7 @@ def manhattan(point1, point2):
 # Scan transformations
 # ----------------------------------------------------------------------
 
-class clip:
+class clip(object):
     """
     Clip coordinates that exceed boundary
     """
@@ -95,7 +95,7 @@ class clip:
             else:
                 return x, y
 
-class reflection:
+class reflection(object):
     """
     Reflect coordinates about x and y axes
     """
@@ -118,7 +118,7 @@ class reflection:
         yr = -y if self.ry else y
         return xr, yr
 
-class reservoir:
+class reservoir(object):
 
     def __init__(self, scan, npoints):
         """
@@ -161,7 +161,7 @@ class reservoir:
 
         raise StopIteration("Reservoir exhausted")
 
-class rotation:
+class rotation(object):
     """
     Rotate coordinates by given angle
     """
@@ -187,7 +187,7 @@ class rotation:
         yr = sa * x + ca * y
         return xr, yr
 
-class sample:
+class sample(object):
     """
     Randomly sample points at the given probability.
     """
@@ -214,7 +214,7 @@ class sample:
                 if random.random() <= self.probability: break
         return x, y
 
-class scale:
+class scale(object):
     """
     Scale coordinates by given factor
     """
@@ -240,7 +240,7 @@ class scale:
         yr = self.sy * y
         return xr, yr
 
-class skip:
+class skip(object):
     """
     Skip points at the given step size
     """
@@ -273,7 +273,7 @@ class skip:
             if ((self.index-self.start) % self.step != 0): continue
             return x, y
 
-class snap:
+class snap(object):
     """
     Snap x and y coordinates to a grid point
     """
@@ -292,7 +292,7 @@ class snap:
         ys = int(round(y))
         return xs, ys
 
-class swap:
+class swap(object):
     """
     Swap x and y coordinates
     """
@@ -309,7 +309,7 @@ class swap:
         x, y = next(self.scan)
         return y, x
 
-class translation:
+class translation(object):
     """
     Translate coordinates by given offset
     """
@@ -479,8 +479,8 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
                 break
 
             # Try and take a step and check if still within distance
-            next = [current[i] + steps[direction][i] for i in range(2)]
-            if metric(center, next) != distance:
+            nextpoint = [current[i] + steps[direction][i] for i in range(2)]
+            if metric(center, nextpoint) != distance:
 
                 # Check if we tried all step directions and failed
                 ntrys += 1
@@ -495,7 +495,7 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
             yield current[0], current[1]
 
             # Check if we have come all the way around
-            current = next
+            current = nextpoint
             if current == initial:
                 break
 
@@ -561,7 +561,6 @@ def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
     cxn = xn
     cxp = cxn + xp
     cyn = cxp + yn
-    cyp = cyn + yp
 
     # Initialize position
     x, y = x0, y0
