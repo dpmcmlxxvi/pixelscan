@@ -126,6 +126,14 @@ They can be snapped to a grid point using the **snap** transformation.
 Changelog
 ***************
 
+- v0.3.0
+    - Switch coverage to coveralls
+    - Clean up code health issues
+    - Fix landscape syntax
+    - Add health and version badges
+    - Fix pylint options syntax
+    - Replace link table with badge links
+
 - v0.2.0
     - Add clip transformation
     - Add random walk generator
