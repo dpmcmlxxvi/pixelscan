@@ -126,6 +126,9 @@ They can be snapped to a grid point using the **snap** transformation.
 Changelog
 ***************
 
+- v0.3.2
+    - Fix deployment token
+
 - v0.3.1
     - Fix pypi deployment twine bug
 
