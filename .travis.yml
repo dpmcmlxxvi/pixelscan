@@ -8,6 +8,8 @@ script:
   - coverage run tests/test.py
 after_success:
   - coveralls
+before_deploy:
+  - pip install twine
 deploy:
   provider: pypi
   user: dpmcmlxxvi
