@@ -75,13 +75,25 @@ The following are the currently available generators
 +==========+===========================================================+
 |circlescan|Generates pixels in a clockwise circular pattern           |
 +----------+-----------------------------------------------------------+
+| .. image:: examples/circlescan.png                                   |
++----------+-----------------------------------------------------------+
 |  gridscan|Generates pixels in rectangular grid pattern               |
++----------+-----------------------------------------------------------+
+| .. image:: examples/gridscan.png                                     |
 +----------+-----------------------------------------------------------+
 |  ringscan|Generates pixels in a ring pattern (squares or diamonds)   |
 +----------+-----------------------------------------------------------+
+| .. image:: examples/chebyshev.png                                    |
++----------------------------------------------------------------------+
+| .. image:: examples/manhattan.png                                    |
++----------+-----------------------------------------------------------+
 |  snakecan|Generates pixels in a snake pattern along the x then y axis|
 +----------+-----------------------------------------------------------+
+| .. image:: examples/snakescan.png                                    |
++----------+-----------------------------------------------------------+
 |  walkscan|Generates pixels in a random pattern using a random walk   |
++----------+-----------------------------------------------------------+
+| .. image:: examples/walkscan.png                                     |
 +----------+-----------------------------------------------------------+
 
 **************************
