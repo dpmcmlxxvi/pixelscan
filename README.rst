@@ -10,10 +10,6 @@ pixelscan
     :target: https://coveralls.io/github/dpmcmlxxvi/pixelscan?branch=master
     :alt: Code Coverage
 
-.. image:: https://landscape.io/github/dpmcmlxxvi/pixelscan/master/landscape.svg?style=flat
-    :target: https://landscape.io/github/dpmcmlxxvi/pixelscan/master
-    :alt: Code Health
-
 .. image:: https://badge.fury.io/py/pixelscan.svg
     :target: https://pypi.python.org/pypi/pixelscan
     :alt: Code Package
