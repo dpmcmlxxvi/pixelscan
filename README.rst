@@ -70,7 +70,7 @@ The following are the currently available generators
 |   Name                             | Description                                               |
 +====================================+===========================================================+
 |circlescan                          |Generates pixels in a clockwise circular pattern           |
-+------------------------------------+                                                           |
++------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/circlescan.png |  .. code-block:: python                                   |
 |                                    |                                                           |
 |                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
@@ -95,7 +95,7 @@ The following are the currently available generators
 |                                    |    (-2, 0) (-2, 1) (-1, 2)                                |
 +------------------------------------+-----------------------------------------------------------+
 |  gridscan                          |Generates pixels in rectangular grid pattern               |
-+------------------------------------+                                                           |
++------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/gridscan.png   |  .. code-block:: python                                   |
 |                                    |                                                           |
 |                                    |    x0, y0, x1, y1 = 0, 0, 2, 2                            |
@@ -117,7 +117,7 @@ The following are the currently available generators
 |                                    |    (0,0) (1,0) (2,0) (0,1) (1,1) (2,1) (0,2) (1,2) (2,2)  |
 +------------------------------------+-----------------------------------------------------------+
 |  ringscan - chebyshev              |Generates pixels in a ring pattern (squares)               |
-+------------------------------------+                                                           |
++------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/chebyshev.png  |  .. code-block:: python                                   |
 |                                    |                                                           |
 |                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
@@ -142,7 +142,7 @@ The following are the currently available generators
 |                                    |    (-1,-2) (-2,-2) (-2,-1) (-2, 0) (-2, 1) (-2,2) (-1,2)  |
 +------------------------------------+-----------------------------------------------------------+
 |  ringscan - manhattan              |Generates pixels in a ring pattern (diamonds)              |
-+------------------------------------+                                                           |
++------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/manhattan.png  |  .. code-block:: python                                   |
 |                                    |                                                           |
 |                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
@@ -165,7 +165,7 @@ The following are the currently available generators
 |                                    |    ( 1, 1) ( 2, 0) ( 1,-1) ( 0,-2) (-1,-1) (-2, 0) (-1, 1)|
 +------------------------------------+-----------------------------------------------------------+
 |  snakecan                          |Generates pixels in a snake pattern along the x then y axis|
-+------------------------------------+                                                           |
++------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/snakescan.png  |  .. code-block:: python                                   |
 |                                    |                                                           |
 |                                    |    x0, y0, x1, y1 = 0, 0, 2, 2                            |
@@ -188,7 +188,7 @@ The following are the currently available generators
 |                                    |    ( 0, 2) ( 1, 2) ( 2, 2)                                |
 +------------------------------------+-----------------------------------------------------------+
 |  walkscan                          |Generates pixels in a random pattern using a random walk   |
-+------------------------------------+                                                           |
++------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/walkscan.png   |  .. code-block:: python                                   |
 |                                    |                                                           |
 |                                    |    random.seed(0)                                         |
