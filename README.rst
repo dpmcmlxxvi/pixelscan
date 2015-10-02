@@ -71,153 +71,159 @@ The following are the currently available generators
 +====================================+===========================================================+
 |circlescan                          |Generates pixels in a clockwise circular pattern           |
 +------------------------------------+-----------------------------------------------------------+
-| .. image:: examples/circlescan.png |  .. code-block:: python                                   |
+| .. image:: examples/circlescan.png |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
-|                                    |    for x, y in snap(circlescan(x0, y0, r1, r2)):          |
-|                                    |        print x, y                                         |
+|                                    |   x0, y0, r1, r2 = 0, 0, 0, 2                             |
+|                                    |   for x, y in snap(circlescan(x0, y0, r1, r2)):           |
+|                                    |       print x, y                                          |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0 = Circle x center                                   |
-|                                    |    y0 = Circle y center                                   |
-|                                    |    r1 = Initial radius                                    |
-|                                    |    r2 = Final radius                                      |
+|                                    |.. code-block:: rest                                       |
+|                                    |                                                           |
+|                                    |   x0 = Circle x center                                    |
+|                                    |   y0 = Circle y center                                    |
+|                                    |   r1 = Initial radius                                     |
+|                                    |   r2 = Final radius                                       |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
-|                                    |  .. code-block:: python                                   |
+|                                    |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    ( 0, 0) ( 0, 1) ( 1, 1) ( 1, 0) ( 1,-1) ( 0,-1)        |
-|                                    |    (-1,-1) (-1, 0) (-1, 1) ( 0, 2) ( 1, 2) ( 2, 1)        |
-|                                    |    ( 2, 0) ( 2,-1) ( 1,-2) ( 0,-2) (-1,-2) (-2,-1)        |
-|                                    |    (-2, 0) (-2, 1) (-1, 2)                                |
+|                                    |   ( 0, 0) ( 0, 1) ( 1, 1) ( 1, 0) ( 1,-1) ( 0,-1)         |
+|                                    |   (-1,-1) (-1, 0) (-1, 1) ( 0, 2) ( 1, 2) ( 2, 1)         |
+|                                    |   ( 2, 0) ( 2,-1) ( 1,-2) ( 0,-2) (-1,-2) (-2,-1)         |
+|                                    |   (-2, 0) (-2, 1) (-1, 2)                                 |
 +------------------------------------+-----------------------------------------------------------+
 |  gridscan                          |Generates pixels in rectangular grid pattern               |
 +------------------------------------+-----------------------------------------------------------+
-| .. image:: examples/gridscan.png   |  .. code-block:: python                                   |
+| .. image:: examples/gridscan.png   |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    xi, yi, xf, yf = 0, 0, 2, 2                            |
-|                                    |    for x, y in gridscan(xi, yi, xf, yf, stepx=1, stepy=1):|
-|                                    |        print x, y                                         |
+|                                    |   xi, yi, xf, yf = 0, 0, 2, 2                             |
+|                                    |   for x, y in gridscan(xi, yi, xf, yf, stepx=1, stepy=1): |
+|                                    |       print x, y                                          |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    xi    = Initial x-coordinate                           |
-|                                    |    yi    = Initial y-coordinate                           |
-|                                    |    xf    = Final x-coordinate                             |
-|                                    |    yf    = Final y-coordinate                             |
-|                                    |    stepx = Step size in x-coordinate                      |
-|                                    |    stepy = Step size in y-coordinate                      |
+|                                    |.. code-block:: rest                                       |
+|                                    |                                                           |
+|                                    |   xi    = Initial x-coordinate                            |
+|                                    |   yi    = Initial y-coordinate                            |
+|                                    |   xf    = Final x-coordinate                              |
+|                                    |   yf    = Final y-coordinate                              |
+|                                    |   stepx = Step size in x-coordinate                       |
+|                                    |   stepy = Step size in y-coordinate                       |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
-|                                    |  .. code-block:: python                                   |
+|                                    |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    (0,0) (1,0) (2,0) (0,1) (1,1) (2,1) (0,2) (1,2) (2,2)  |
+|                                    |   (0,0) (1,0) (2,0) (0,1) (1,1) (2,1) (0,2) (1,2) (2,2)   |
 +------------------------------------+-----------------------------------------------------------+
 |  ringscan - chebyshev              |Generates pixels in a ring pattern (squares)               |
 +------------------------------------+-----------------------------------------------------------+
-| .. image:: examples/chebyshev.png  |  .. code-block:: python                                   |
+| .. image:: examples/chebyshev.png  |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
-|                                    |    for x, y in ringscan(x0, y0, r1, r2, metric=chebyshev):|
-|                                    |        print x, y                                         |
+|                                    |   x0, y0, r1, r2 = 0, 0, 0, 2                             |
+|                                    |   for x, y in ringscan(x0, y0, r1, r2, metric=chebyshev): |
+|                                    |       print x, y                                          |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0     = Circle x center                               |
-|                                    |    y0     = Circle y center                               |
-|                                    |    r1     = Initial radius                                |
-|                                    |    r2     = Final radius                                  |
-|                                    |    r2     = Final radius                                  |
-|                                    |    metric = Distance metric                               |
+|                                    |.. code-block:: rest                                       |
+|                                    |                                                           |
+|                                    |   x0     = Circle x center                                |
+|                                    |   y0     = Circle y center                                |
+|                                    |   r1     = Initial radius                                 |
+|                                    |   r2     = Final radius                                   |
+|                                    |   r2     = Final radius                                   |
+|                                    |   metric = Distance metric                                |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
-|                                    |  .. code-block:: python                                   |
+|                                    |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    ( 0, 0) ( 0, 1) ( 1, 1) ( 1, 0) ( 1,-1) ( 0,-1)        |
-|                                    |    (-1,-1) (-1, 0) (-1, 1) ( 0, 2) ( 1, 2) ( 2, 2)        |
-|                                    |    ( 2, 1) ( 2, 0) ( 2,-1) ( 2,-2) ( 1,-2) ( 0,-2)        |
-|                                    |    (-1,-2) (-2,-2) (-2,-1) (-2, 0) (-2, 1) (-2,2) (-1,2)  |
+|                                    |   ( 0, 0) ( 0, 1) ( 1, 1) ( 1, 0) ( 1,-1) ( 0,-1)         |
+|                                    |   (-1,-1) (-1, 0) (-1, 1) ( 0, 2) ( 1, 2) ( 2, 2)         |
+|                                    |   ( 2, 1) ( 2, 0) ( 2,-1) ( 2,-2) ( 1,-2) ( 0,-2)         |
+|                                    |   (-1,-2) (-2,-2) (-2,-1) (-2, 0) (-2, 1) (-2,2) (-1,2)   |
 +------------------------------------+-----------------------------------------------------------+
 |  ringscan - manhattan              |Generates pixels in a ring pattern (diamonds)              |
 +------------------------------------+-----------------------------------------------------------+
-| .. image:: examples/manhattan.png  |  .. code-block:: python                                   |
+| .. image:: examples/manhattan.png  |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
-|                                    |    for x, y in ringscan(x0, y0, r1, r2, metric=manhattan):|
-|                                    |        print x, y                                         |
+|                                    |   x0, y0, r1, r2 = 0, 0, 0, 2                             |
+|                                    |   for x, y in ringscan(x0, y0, r1, r2, metric=manhattan): |
+|                                    |       print x, y                                          |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0 = Circle x center                                   |
-|                                    |    y0 = Circle y center                                   |
-|                                    |    r1 = Initial radius                                    |
-|                                    |    r2 = Final radius                                      |
-|                                    |    metric = Distance metric                               |
+|                                    |.. code-block:: rest                                       |
+|                                    |                                                           |
+|                                    |   x0 = Circle x center                                    |
+|                                    |   y0 = Circle y center                                    |
+|                                    |   r1 = Initial radius                                     |
+|                                    |   r2 = Final radius                                       |
+|                                    |   metric = Distance metric                                |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
-|                                    |  .. code-block:: python                                   |
+|                                    |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    ( 0, 0) ( 0, 1) ( 1, 0) ( 0,-1) (-1, 0) ( 0, 2)        |
-|                                    |    ( 1, 1) ( 2, 0) ( 1,-1) ( 0,-2) (-1,-1) (-2, 0) (-1, 1)|
+|                                    |   ( 0, 0) ( 0, 1) ( 1, 0) ( 0,-1) (-1, 0) ( 0, 2)         |
+|                                    |   ( 1, 1) ( 2, 0) ( 1,-1) ( 0,-2) (-1,-1) (-2, 0) (-1, 1) |
 +------------------------------------+-----------------------------------------------------------+
 |  snakecan                          |Generates pixels in a snake pattern along the x then y axis|
 +------------------------------------+-----------------------------------------------------------+
-| .. image:: examples/snakescan.png  |  .. code-block:: python                                   |
+| .. image:: examples/snakescan.png  |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    xi, yi, xf, yf = 0, 0, 2, 2                            |
-|                                    |    for x, y in snakescan(xi, yi, xf, yf):                 |
-|                                    |        print x, y                                         |
+|                                    |   xi, yi, xf, yf = 0, 0, 2, 2                             |
+|                                    |   for x, y in snakescan(xi, yi, xf, yf):                  |
+|                                    |       print x, y                                          |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    xi = Initial x-coordinate                              |
-|                                    |    yi = Initial y-coordinate                              |
-|                                    |    xf = Final x-coordinate                                |
-|                                    |    yf = Final y-coordinate                                |
+|                                    |.. code-block:: rest                                       |
+|                                    |                                                           |
+|                                    |   xi = Initial x-coordinate                               |
+|                                    |   yi = Initial y-coordinate                               |
+|                                    |   xf = Final x-coordinate                                 |
+|                                    |   yf = Final y-coordinate                                 |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
-|                                    |  .. code-block:: python                                   |
+|                                    |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    ( 0, 0) ( 1, 0) ( 2, 0) ( 2, 1) ( 1, 1) ( 0, 1)        |
-|                                    |    ( 0, 2) ( 1, 2) ( 2, 2)                                |
+|                                    |   ( 0, 0) ( 1, 0) ( 2, 0) ( 2, 1) ( 1, 1) ( 0, 1)         |
+|                                    |   ( 0, 2) ( 1, 2) ( 2, 2)                                 |
 +------------------------------------+-----------------------------------------------------------+
 |  walkscan                          |Generates pixels in a random pattern using a random walk   |
 +------------------------------------+-----------------------------------------------------------+
-| .. image:: examples/walkscan.png   |  .. code-block:: python                                   |
+| .. image:: examples/walkscan.png   |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    random.seed(0)                                         |
-|                                    |    x0, y0, = 0, 0                                         |
-|                                    |    for x, y in skip(walkscan(x0, y0, xn=0.25, xp=0.25,    |
-|                                    |                              yn=0.25, yp=0.25), stop=8):  |
-|                                    |        print x, y                                         |
+|                                    |   random.seed(0)                                          |
+|                                    |   x0, y0, = 0, 0                                          |
+|                                    |   for x, y in skip(walkscan(x0, y0, xn=0.25, xp=0.25,     |
+|                                    |                             yn=0.25, yp=0.25), stop=8):   |
+|                                    |       print x, y                                          |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0 = Initial x-coordinate                              |
-|                                    |    y0 = Initial y-coordinate                              |
-|                                    |    xn = Probability of moving in the negative x direction |
-|                                    |    xp = Probability of moving in the positive x direction |
-|                                    |    yn = Probability of moving in the negative y direction |
-|                                    |    yp = Probability of moving in the positive y direction |
+|                                    |.. code-block:: rest                                       |
+|                                    |                                                           |
+|                                    |   x0 = Initial x-coordinate                               |
+|                                    |   y0 = Initial y-coordinate                               |
+|                                    |   xn = Probability of moving in the negative x direction  |
+|                                    |   xp = Probability of moving in the positive x direction  |
+|                                    |   yn = Probability of moving in the negative y direction  |
+|                                    |   yp = Probability of moving in the positive y direction  |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
-|                                    |  .. code-block:: python                                   |
+|                                    |.. code-block:: python                                     |
 |                                    |                                                           |
-|                                    |    ( 0, 0) ( 0, 1) ( 0, 2) ( 1, 2) ( 2, 2) ( 2, 1)        |
-|                                    |    ( 3, 1) ( 3, 2) ( 4, 2)                                |
+|                                    |   ( 0, 0) ( 0, 1) ( 0, 2) ( 1, 2) ( 2, 2) ( 2, 1)         |
+|                                    |   ( 3, 1) ( 3, 2) ( 4, 2)                                 |
 +------------------------------------+-----------------------------------------------------------+
 
 **************************
@@ -245,7 +251,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan      = Pixel scan generator                                    |
 |   minx      = Minimum x-coordinate (default = -sys.maxint)            |
@@ -267,7 +273,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan = Pixel scan generator                                         |
 |   rx   = True if x-coordinate should be reflected (default=False)     |
@@ -283,7 +289,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan    = Pixel scan generator                                      |
 |   npoints = Sample size                                               |
@@ -298,7 +304,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan  = Pixel scan generator                                        |
 |   angle = Counter-clockwise angle in degrees (default=0)              |
@@ -313,7 +319,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan        = Pixel scan generator                                  |
 |   probability = Sampling probability in interval [0,1] (default=1)    |
@@ -328,7 +334,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan = Pixel scan generator                                         |
 |   sx   = x-coordinate scale factor (default=1)                        |
@@ -344,7 +350,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan  = Pixel scan generator                                        |
 |   start = Iteration starting 0-based index (default = 0)              |
@@ -361,7 +367,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan = Pixel scan generator                                         |
 +-----------+-----------------------------------------------------------+
@@ -375,7 +381,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan = Pixel scan generator                                         |
 +-----------+-----------------------------------------------------------+
@@ -389,7 +395,7 @@ The following are the currently available transformations
 |                                                                       |
 |where                                                                  |
 |                                                                       |
-|  .. code-block:: rest                                                 |
+|.. code-block:: rest                                                   |
 |                                                                       |
 |   scan = Pixel scan generator                                         |
 |   tx   = x-coordinate translation offset (default = 0)                |
