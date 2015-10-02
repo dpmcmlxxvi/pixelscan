@@ -69,7 +69,7 @@ class clip(object):
         :param predicate: Optional function that takes 2 arguments (x and y)
                           and returns true if coordinate should be kept
                           otherwise false (default = None)
-        :param abort: Abort iteration is boundary is crossed
+        :param abort: Abort iteration if boundary is crossed
         """
         self.scan = scan
         self.minx = minx
@@ -102,8 +102,8 @@ class reflection(object):
     def __init__(self, scan, rx=False, ry=False):
         """
         :param scan: Pixel scan generator
-        :param rx: True if x coordinate should be reflected (default=False)
-        :param ry: True if y coordinate should be reflected (default=False)
+        :param rx: True if x-coordinate should be reflected (default=False)
+        :param ry: True if y-coordinate should be reflected (default=False)
         """
         self.scan = scan
         self.rx = rx
@@ -222,8 +222,8 @@ class scale(object):
     def __init__(self, scan, sx=1, sy=1):
         """
         :param scan: Pixel scan generator
-        :param sx: X-coordinate scale factor (default=1)
-        :param sy: Y-coordinate scale factor (default=1)
+        :param sx: x-coordinate scale factor (default=1)
+        :param sy: y-coordinate scale factor (default=1)
         """
         if sx <= 0: raise ValueError("X-scale must be positive")
         if sy <= 0: raise ValueError("Y-scale must be positive")
@@ -317,8 +317,8 @@ class translation(object):
     def __init__(self, scan, tx=0, ty=0):
         """
         :param scan: Pixel scan generator
-        :param sx: X-coordinate translation offset (default = 0)
-        :param sy: Y-coordinate translaation offset (default = 0)
+        :param sx: x-coordinate translation offset (default = 0)
+        :param sy: y-coordinate translaation offset (default = 0)
         """
         self.scan = scan
         self.tx = tx
@@ -411,12 +411,12 @@ def circlescan(x0, y0, r1, r2):
 def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
     """
     Scan pixels in a grid pattern along the x-coordinate then y-coordinate
-    :param xi: Initial x coordinate
-    :param yi: Initial y coordinate
-    :param xf: Final x coordinate
-    :param yf: Final y coordinate
-    :param stepx: Number of pixel to skip during scan in x-coordinate
-    :param stepy: Number of pixel to skip during scan in y-coordinate
+    :param xi: Initial x-coordinate
+    :param yi: Initial y-coordinate
+    :param xf: Final x-coordinate
+    :param yf: Final y-coordinate
+    :param stepx: Step size in x-coordinate
+    :param stepy: Step size in y-coordinate
     :returns: Coordinate generator
     """
 
@@ -506,10 +506,10 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
 def snakescan(xi, yi, xf, yf):
     """
     Scan pixels in a snake pattern along the x-coordinate then y-coordinate
-    :param xi: Initial x coordinate
-    :param yi: Initial y coordinate
-    :param xf: Final x coordinate
-    :param yf: Final y coordinate
+    :param xi: Initial x-coordinate
+    :param yi: Initial y-coordinate
+    :param xf: Final x-coordinate
+    :param yf: Final y-coordinate
     :returns: Coordinate generator
     """
 
@@ -532,8 +532,8 @@ def snakescan(xi, yi, xf, yf):
 def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
     """
     Scan pixels in a random walk pattern with given step probabilities
-    :param x0: Initial x coordinate
-    :param y0: Initial y coordinate
+    :param x0: Initial x-coordinate
+    :param y0: Initial y-coordinate
     :param xn: Probability of moving in the negative x direction
     :param xp: Probability of moving in the positive x direction
     :param yn: Probability of moving in the negative y direction

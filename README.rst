@@ -78,7 +78,7 @@ The following are the currently available generators
 |                                    |        print x, y                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: python                                   |
+|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
 |                                    |    x0 = Circle x center                                   |
 |                                    |    y0 = Circle y center                                   |
@@ -98,17 +98,19 @@ The following are the currently available generators
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/gridscan.png   |  .. code-block:: python                                   |
 |                                    |                                                           |
-|                                    |    x0, y0, x1, y1 = 0, 0, 2, 2                            |
-|                                    |    for x, y in gridscan(x0, y0, x1, y1):                  |
+|                                    |    xi, yi, xf, yf = 0, 0, 2, 2                            |
+|                                    |    for x, y in gridscan(xi, yi, xf, yf, stepx=1, stepy=1):|
 |                                    |        print x, y                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: python                                   |
+|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0 = Initial x coordinate                              |
-|                                    |    y0 = Initial y coordinate                              |
-|                                    |    x1 = Final x coordinate                                |
-|                                    |    y1 = Final y coordinate                                |
+|                                    |    xi    = Initial x-coordinate                           |
+|                                    |    yi    = Initial y-coordinate                           |
+|                                    |    xf    = Final x-coordinate                             |
+|                                    |    yf    = Final y-coordinate                             |
+|                                    |    stepx = Step size in x-coordinate                      |
+|                                    |    stepy = Step size in y-coordinate                      |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
@@ -125,12 +127,14 @@ The following are the currently available generators
 |                                    |        print x, y                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: python                                   |
+|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0 = Circle x center                                   |
-|                                    |    y0 = Circle y center                                   |
-|                                    |    r1 = Initial radius                                    |
-|                                    |    r2 = Final radius                                      |
+|                                    |    x0     = Circle x center                               |
+|                                    |    y0     = Circle y center                               |
+|                                    |    r1     = Initial radius                                |
+|                                    |    r2     = Final radius                                  |
+|                                    |    r2     = Final radius                                  |
+|                                    |    metric = Distance metric                               |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
@@ -150,12 +154,13 @@ The following are the currently available generators
 |                                    |        print x, y                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: python                                   |
+|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
 |                                    |    x0 = Circle x center                                   |
 |                                    |    y0 = Circle y center                                   |
 |                                    |    r1 = Initial radius                                    |
 |                                    |    r2 = Final radius                                      |
+|                                    |    metric = Distance metric                               |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
@@ -168,17 +173,17 @@ The following are the currently available generators
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/snakescan.png  |  .. code-block:: python                                   |
 |                                    |                                                           |
-|                                    |    x0, y0, x1, y1 = 0, 0, 2, 2                            |
-|                                    |    for x, y in snakescan(x0, y0, x1, y1):                 |
+|                                    |    xi, yi, xf, yf = 0, 0, 2, 2                            |
+|                                    |    for x, y in snakescan(xi, yi, xf, yf):                 |
 |                                    |        print x, y                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: python                                   |
+|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0 = Initial x coordinate                              |
-|                                    |    y0 = Initial y coordinate                              |
-|                                    |    x1 = Final x coordinate                                |
-|                                    |    y1 = Final y coordinate                                |
+|                                    |    xi = Initial x-coordinate                              |
+|                                    |    yi = Initial y-coordinate                              |
+|                                    |    xf = Final x-coordinate                                |
+|                                    |    yf = Final y-coordinate                                |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
@@ -192,16 +197,20 @@ The following are the currently available generators
 | .. image:: examples/walkscan.png   |  .. code-block:: python                                   |
 |                                    |                                                           |
 |                                    |    random.seed(0)                                         |
-|                                    |    x0, y0, stop = 0, 0, 8                                 |
-|                                    |    for x, y in skip(walkscan(x0, y0), stop=stop):         |
+|                                    |    x0, y0, = 0, 0                                         |
+|                                    |    for x, y in skip(walkscan(x0, y0, xn=0.25, xp=0.25,    |
+|                                    |                              yn=0.25, yp=0.25), stop=8):  |
 |                                    |        print x, y                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
-|                                    |  .. code-block:: python                                   |
+|                                    |  .. code-block:: rest                                     |
 |                                    |                                                           |
-|                                    |    x0   = Initial x coordinate                            |
-|                                    |    y0   = Initial y coordinate                            |
-|                                    |    stop = Index to sto iteration (0-based)                |
+|                                    |    x0 = Initial x-coordinate                              |
+|                                    |    y0 = Initial y-coordinate                              |
+|                                    |    xn = Probability of moving in the negative x direction |
+|                                    |    xp = Probability of moving in the positive x direction |
+|                                    |    yn = Probability of moving in the negative y direction |
+|                                    |    yp = Probability of moving in the positive y direction |
 |                                    |                                                           |
 |                                    |produces the following points:                             |
 |                                    |                                                           |
@@ -222,23 +231,169 @@ The following are the currently available transformations
 +===========+===========================================================+
 |       clip|Clips the coordinates at the given boundary                |
 +-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   clip(scan,                                                          |
+|        minx      = int,                                               |
+|        maxx      = int,                                               |
+|        miny      = int,                                               |
+|        maxy      = int,                                               |
+|        predicate = function,                                          |
+|        abort     = bool)                                              |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan      = Pixel scan generator                                    |
+|   minx      = Minimum x-coordinate (default = -sys.maxint)            |
+|   maxx      = Maximum x-coordinate (default =  sys.maxint)            |
+|   miny      = Minimum y-coordinate (default = -sys.maxint)            |
+|   maxy      = Maximum y-coordinate (default =  sys.maxint)            |
+|   predicate = Optional function that takes 2 arguments (x and y)      |
+|               and returns true if coordinate should be kept           |
+|               otherwise false (default = None)                        |
+|   abort     = Abort iteration if boundary is crossed                  |
++-----------+-----------------------------------------------------------+
 | reflection|Reflects the coordinates along the x and/or y axis         |
++-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   reflection(scan, rx = bool, ry = bool)                              |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan = Pixel scan generator                                         |
+|   rx   = True if x-coordinate should be reflected (default=False)     |
+|   ry   = True if y-coordinate should be reflected (default=False)     |
 +-----------+-----------------------------------------------------------+
 |  reservoir|Randomly samples the pixels using reservoir sampling       |
 +-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   reservoir(scan, npoints = int)                                      |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan    = Pixel scan generator                                      |
+|   npoints = Sample size                                               |
++-----------+-----------------------------------------------------------+
 |   rotation|Rotates the coordinates about the origin counter-clockwise |
++-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   rotation(scan, angle = float)                                       |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan  = Pixel scan generator                                        |
+|   angle = Counter-clockwise angle in degrees (default=0)              |
 +-----------+-----------------------------------------------------------+
 |     sample|Randomly samples the pixels with a given probability       |
 +-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   sample(scan, probability = float)                                   |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan        = Pixel scan generator                                  |
+|   probability = Sampling probability in interval [0,1] (default=1)    |
++-----------+-----------------------------------------------------------+
 |      scale|Scales the coordinates with a given scale factors          |
++-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   scale(scan, sx = float, sy = float)                                 |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan = Pixel scan generator                                         |
+|   sx   = x-coordinate scale factor (default=1)                        |
+|   sy   = y-coordinate scale factor (default=1)                        |
 +-----------+-----------------------------------------------------------+
 |       skip|Skips the pixels with the given step size                  |
 +-----------+-----------------------------------------------------------+
-|       snap|Snap the x and y coordinates to a grid point               |
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   skip(scan, start = int, stop = int, step = int)                     |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan  = Pixel scan generator                                        |
+|   start = Iteration starting 0-based index (default = 0)              |
+|   stop  = Iteration stopping 0-based index (default = sys.maxint)     |
+|   step  = Iteration step size (default = 1)                           |
++-----------+-----------------------------------------------------------+
+|       snap|Snap the x and y coordinates to the nearest grid point     |
++-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   snap(scan)                                                          |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan = Pixel scan generator                                         |
 +-----------+-----------------------------------------------------------+
 |       swap|Swap the x and y coordinates                               |
 +-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   swap(scan)                                                          |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan = Pixel scan generator                                         |
++-----------+-----------------------------------------------------------+
 |translation|Translates the coordinates by the given offsets            |
++-----------+-----------------------------------------------------------+
+|Syntax:                                                                |
+|                                                                       |
+|.. code-block:: python                                                 |
+|                                                                       |
+|   translation(scan, tx = float, ty = float)                           |
+|                                                                       |
+|where                                                                  |
+|                                                                       |
+|  .. code-block:: rest                                                 |
+|                                                                       |
+|   scan = Pixel scan generator                                         |
+|   tx   = x-coordinate translation offset (default = 0)                |
+|   ty   = y-coordinate translation offset (default = 0)                |
 +-----------+-----------------------------------------------------------+
 
 
