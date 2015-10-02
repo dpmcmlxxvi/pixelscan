@@ -66,31 +66,150 @@ Scan Generators
 
 The following are the currently available generators
 
-+----------+-----------------------------------------------------------+
-|   Name   | Description                                               |
-+==========+===========================================================+
-|circlescan|Generates pixels in a clockwise circular pattern           |
-+----------+-----------------------------------------------------------+
-| .. image:: examples/circlescan.png                                   |
-+----------+-----------------------------------------------------------+
-|  gridscan|Generates pixels in rectangular grid pattern               |
-+----------+-----------------------------------------------------------+
-| .. image:: examples/gridscan.png                                     |
-+----------+-----------------------------------------------------------+
-|  ringscan|Generates pixels in a ring pattern (squares or diamonds)   |
-+----------+-----------------------------------------------------------+
-| .. image:: examples/chebyshev.png                                    |
-+----------------------------------------------------------------------+
-| .. image:: examples/manhattan.png                                    |
-+----------+-----------------------------------------------------------+
-|  snakecan|Generates pixels in a snake pattern along the x then y axis|
-+----------+-----------------------------------------------------------+
-| .. image:: examples/snakescan.png                                    |
-+----------+-----------------------------------------------------------+
-|  walkscan|Generates pixels in a random pattern using a random walk   |
-+----------+-----------------------------------------------------------+
-| .. image:: examples/walkscan.png                                     |
-+----------+-----------------------------------------------------------+
++------------------------------------+-----------------------------------------------------------+
+|   Name                             | Description                                               |
++====================================+===========================================================+
+|circlescan                          |Generates pixels in a clockwise circular pattern           |
++------------------------------------+                                                           |
+| .. image:: examples/circlescan.png |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
+|                                    |    for x, y in snap(circlescan(x0, y0, r1, r2)):          |
+|                                    |        print x, y                                         |
+|                                    |                                                           |
+|                                    |where                                                      |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0 = Circle x center                                   |
+|                                    |    y0 = Circle y center                                   |
+|                                    |    r1 = Initial radius                                    |
+|                                    |    r2 = Final radius                                      |
+|                                    |                                                           |
+|                                    |produces the following points:                             |
+|                                    |                                                           |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    ( 0, 0) ( 0, 1) ( 1, 1) ( 1, 0) ( 1,-1) ( 0,-1)        |
+|                                    |    (-1,-1) (-1, 0) (-1, 1) ( 0, 2) ( 1, 2) ( 2, 1)        |
+|                                    |    ( 2, 0) ( 2,-1) ( 1,-2) ( 0,-2) (-1,-2) (-2,-1)        |
+|                                    |    (-2, 0) (-2, 1) (-1, 2)                                |
++------------------------------------+-----------------------------------------------------------+
+|  gridscan                          |Generates pixels in rectangular grid pattern               |
++------------------------------------+                                                           |
+| .. image:: examples/gridscan.png   |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0, y0, x1, y1 = 0, 0, 2, 2                            |
+|                                    |    for x, y in gridscan(x0, y0, x1, y1):                  |
+|                                    |        print x, y                                         |
+|                                    |                                                           |
+|                                    |where                                                      |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0 = Initial x coordinate                              |
+|                                    |    y0 = Initial y coordinate                              |
+|                                    |    x1 = Final x coordinate                                |
+|                                    |    y1 = Final y coordinate                                |
+|                                    |                                                           |
+|                                    |produces the following points:                             |
+|                                    |                                                           |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    (0,0) (1,0) (2,0) (0,1) (1,1) (2,1) (0,2) (1,2) (2,2)  |
++------------------------------------+-----------------------------------------------------------+
+|  ringscan - chebyshev              |Generates pixels in a ring pattern (squares)               |
++------------------------------------+                                                           |
+| .. image:: examples/chebyshev.png  |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
+|                                    |    for x, y in ringscan(x0, y0, r1, r2, metric=chebyshev):|
+|                                    |        print x, y                                         |
+|                                    |                                                           |
+|                                    |where                                                      |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0 = Circle x center                                   |
+|                                    |    y0 = Circle y center                                   |
+|                                    |    r1 = Initial radius                                    |
+|                                    |    r2 = Final radius                                      |
+|                                    |                                                           |
+|                                    |produces the following points:                             |
+|                                    |                                                           |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    ( 0, 0) ( 0, 1) ( 1, 1) ( 1, 0) ( 1,-1) ( 0,-1)        |
+|                                    |    (-1,-1) (-1, 0) (-1, 1) ( 0, 2) ( 1, 2) ( 2, 2)        |
+|                                    |    ( 2, 1) ( 2, 0) ( 2,-1) ( 2,-2) ( 1,-2) ( 0,-2)        |
+|                                    |    (-1,-2) (-2,-2) (-2,-1) (-2, 0) (-2, 1) (-2,2) (-1,2)  |
++------------------------------------+-----------------------------------------------------------+
+|  ringscan - manhattan              |Generates pixels in a ring pattern (diamonds)              |
++------------------------------------+                                                           |
+| .. image:: examples/manhattan.png  |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0, y0, r1, r2 = 0, 0, 0, 2                            |
+|                                    |    for x, y in ringscan(x0, y0, r1, r2, metric=manhattan):|
+|                                    |        print x, y                                         |
+|                                    |                                                           |
+|                                    |where                                                      |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0 = Circle x center                                   |
+|                                    |    y0 = Circle y center                                   |
+|                                    |    r1 = Initial radius                                    |
+|                                    |    r2 = Final radius                                      |
+|                                    |                                                           |
+|                                    |produces the following points:                             |
+|                                    |                                                           |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    ( 0, 0) ( 0, 1) ( 1, 0) ( 0,-1) (-1, 0) ( 0, 2)        |
+|                                    |    ( 1, 1) ( 2, 0) ( 1,-1) ( 0,-2) (-1,-1) (-2, 0) (-1, 1)|
++------------------------------------+-----------------------------------------------------------+
+|  snakecan                          |Generates pixels in a snake pattern along the x then y axis|
++------------------------------------+                                                           |
+| .. image:: examples/snakescan.png  |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0, y0, x1, y1 = 0, 0, 2, 2                            |
+|                                    |    for x, y in snakescan(x0, y0, x1, y1):                 |
+|                                    |        print x, y                                         |
+|                                    |                                                           |
+|                                    |where                                                      |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0 = Initial x coordinate                              |
+|                                    |    y0 = Initial y coordinate                              |
+|                                    |    x1 = Final x coordinate                                |
+|                                    |    y1 = Final y coordinate                                |
+|                                    |                                                           |
+|                                    |produces the following points:                             |
+|                                    |                                                           |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    ( 0, 0) ( 1, 0) ( 2, 0) ( 2, 1) ( 1, 1) ( 0, 1)        |
+|                                    |    ( 0, 2) ( 1, 2) ( 2, 2)                                |
++------------------------------------+-----------------------------------------------------------+
+|  walkscan                          |Generates pixels in a random pattern using a random walk   |
++------------------------------------+                                                           |
+| .. image:: examples/walkscan.png   |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    random.seed(0)                                         |
+|                                    |    x0, y0, stop = 0, 0, 8                                 |
+|                                    |    for x, y in skip(walkscan(x0, y0), stop=stop):         |
+|                                    |        print x, y                                         |
+|                                    |                                                           |
+|                                    |where                                                      |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    x0   = Initial x coordinate                            |
+|                                    |    y0   = Initial y coordinate                            |
+|                                    |    stop = Index to sto iteration (0-based)                |
+|                                    |                                                           |
+|                                    |produces the following points:                             |
+|                                    |                                                           |
+|                                    |  .. code-block:: python                                   |
+|                                    |                                                           |
+|                                    |    ( 0, 0) ( 0, 1) ( 0, 2) ( 1, 2) ( 2, 2) ( 2, 1)        |
+|                                    |    ( 3, 1) ( 3, 2) ( 4, 2)                                |
++------------------------------------+-----------------------------------------------------------+
 
 **************************
 Coordinate Transformations
@@ -127,8 +246,9 @@ The following are the currently available transformations
 Warnings
 ***************
 
-Transformations such as the **rotation** can yield non-grid points.
-They can be snapped to a grid point using the **snap** transformation.
+Scan Generators such as **circlescan** and Coordinate Transformations such as
+**rotation** can yield non-grid points. They can be snapped to a grid point
+using the **snap** transformation.
 
 ***************
 Changelog
