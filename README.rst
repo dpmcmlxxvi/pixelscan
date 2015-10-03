@@ -34,7 +34,7 @@ The typical calling syntax is
       foo(x,y)
 
 For example, the following scans pixels in a clockwise circular pattern
-from the origin up to a radius of 1
+from the origin up to a radius of one
 
 .. code-block:: python
 
@@ -95,7 +95,7 @@ The following are the currently available generators
 |                                    |   ( 2, 0) ( 2,-1) ( 1,-2) ( 0,-2) (-1,-2) (-2,-1)         |
 |                                    |   (-2, 0) (-2, 1) (-1, 2)                                 |
 +------------------------------------+-----------------------------------------------------------+
-|  gridscan                          |Generates pixels in rectangular grid pattern               |
+|gridscan                            |Generates pixels in rectangular grid pattern               |
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/gridscan.png   |.. code-block:: python                                     |
 |                                    |                                                           |
@@ -120,7 +120,7 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   (0,0) (1,0) (2,0) (0,1) (1,1) (2,1) (0,2) (1,2) (2,2)   |
 +------------------------------------+-----------------------------------------------------------+
-|  ringscan - chebyshev              |Generates pixels in a ring pattern (squares)               |
+|ringscan - chebyshev                |Generates pixels in a ring pattern (squares)               |
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/chebyshev.png  |.. code-block:: python                                     |
 |                                    |                                                           |
@@ -148,7 +148,7 @@ The following are the currently available generators
 |                                    |   ( 2, 1) ( 2, 0) ( 2,-1) ( 2,-2) ( 1,-2) ( 0,-2)         |
 |                                    |   (-1,-2) (-2,-2) (-2,-1) (-2, 0) (-2, 1) (-2,2) (-1,2)   |
 +------------------------------------+-----------------------------------------------------------+
-|  ringscan - manhattan              |Generates pixels in a ring pattern (diamonds)              |
+|ringscan - manhattan                |Generates pixels in a ring pattern (diamonds)              |
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/manhattan.png  |.. code-block:: python                                     |
 |                                    |                                                           |
@@ -173,7 +173,7 @@ The following are the currently available generators
 |                                    |   ( 0, 0) ( 0, 1) ( 1, 0) ( 0,-1) (-1, 0) ( 0, 2)         |
 |                                    |   ( 1, 1) ( 2, 0) ( 1,-1) ( 0,-2) (-1,-1) (-2, 0) (-1, 1) |
 +------------------------------------+-----------------------------------------------------------+
-|  snakecan                          |Generates pixels in a snake pattern along the x then y axis|
+|snakescan                           |Generates pixels in a snake pattern along the x then y axis|
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/snakescan.png  |.. code-block:: python                                     |
 |                                    |                                                           |
@@ -197,7 +197,7 @@ The following are the currently available generators
 |                                    |   ( 0, 0) ( 1, 0) ( 2, 0) ( 2, 1) ( 1, 1) ( 0, 1)         |
 |                                    |   ( 0, 2) ( 1, 2) ( 2, 2)                                 |
 +------------------------------------+-----------------------------------------------------------+
-|  walkscan                          |Generates pixels in a random pattern using a random walk   |
+|walkscan                            |Generates pixels in a random pattern using a random walk   |
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/walkscan.png   |.. code-block:: python                                     |
 |                                    |                                                           |
@@ -235,7 +235,7 @@ The following are the currently available transformations
 +-----------+-----------------------------------------------------------+
 |    Name   | Description                                               |
 +===========+===========================================================+
-|       clip|Clips the coordinates at the given boundary                |
+|clip       |Clips the coordinates at the given boundary                |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -263,7 +263,7 @@ The following are the currently available transformations
 |               otherwise false (default = None)                        |
 |   abort     = Abort iteration if boundary is crossed                  |
 +-----------+-----------------------------------------------------------+
-| reflection|Reflects the coordinates along the x and/or y axis         |
+|reflection |Reflects the coordinates along the x and/or y axis         |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -279,7 +279,7 @@ The following are the currently available transformations
 |   rx   = True if x-coordinate should be reflected (default=False)     |
 |   ry   = True if y-coordinate should be reflected (default=False)     |
 +-----------+-----------------------------------------------------------+
-|  reservoir|Randomly samples the pixels using reservoir sampling       |
+|reservoir  |Randomly samples the pixels using reservoir sampling       |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -294,7 +294,7 @@ The following are the currently available transformations
 |   scan    = Pixel scan generator                                      |
 |   npoints = Sample size                                               |
 +-----------+-----------------------------------------------------------+
-|   rotation|Rotates the coordinates about the origin counter-clockwise |
+|rotation   |Rotates the coordinates about the origin counter-clockwise |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -309,7 +309,7 @@ The following are the currently available transformations
 |   scan  = Pixel scan generator                                        |
 |   angle = Counter-clockwise angle in degrees (default=0)              |
 +-----------+-----------------------------------------------------------+
-|     sample|Randomly samples the pixels with a given probability       |
+|sample     |Randomly samples the pixels with a given probability       |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -324,7 +324,7 @@ The following are the currently available transformations
 |   scan        = Pixel scan generator                                  |
 |   probability = Sampling probability in interval [0,1] (default=1)    |
 +-----------+-----------------------------------------------------------+
-|      scale|Scales the coordinates with a given scale factors          |
+|scale      |Scales the coordinates with a given scale factors          |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -340,7 +340,7 @@ The following are the currently available transformations
 |   sx   = x-coordinate scale factor (default=1)                        |
 |   sy   = y-coordinate scale factor (default=1)                        |
 +-----------+-----------------------------------------------------------+
-|       skip|Skips the pixels with the given step size                  |
+|skip       |Skips the pixels with the given step size                  |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -357,7 +357,7 @@ The following are the currently available transformations
 |   stop  = Iteration stopping 0-based index (default = sys.maxint)     |
 |   step  = Iteration step size (default = 1)                           |
 +-----------+-----------------------------------------------------------+
-|       snap|Snap the x and y coordinates to the nearest grid point     |
+|snap       |Snap the x and y coordinates to the nearest grid point     |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
@@ -371,7 +371,7 @@ The following are the currently available transformations
 |                                                                       |
 |   scan = Pixel scan generator                                         |
 +-----------+-----------------------------------------------------------+
-|       swap|Swap the x and y coordinates                               |
+|swap       |Swap the x and y coordinates                               |
 +-----------+-----------------------------------------------------------+
 |Syntax:                                                                |
 |                                                                       |
