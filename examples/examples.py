@@ -18,6 +18,10 @@ def main():
         points = gridscan(x0, y0, x1, y1)
         printpoints("gridscan.csv", points)
 
+        size, distance = 4, 16
+        points = hilbertscan(size, distance)
+        printpoints("hilbertscan.csv", points)
+
         x0, y0, r1, r2 = 0, 0, 0, 2
         points = ringscan(x0, y0, r1, r2, metric=chebyshev)
         printpoints("chebyshev.csv", points)

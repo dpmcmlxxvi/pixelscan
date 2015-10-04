@@ -87,6 +87,15 @@ class TestPixelscan(unittest.TestCase):
             self.assertEqual(point, truth[index])
         self.assertEqual(index+1, len(truth))
 
+    def test_hilbertscan(self):
+        truth = [(0,0), (0,1), (1,1), (1,0), (2,0), (3,0), (3,1), (2,1), \
+                (2,2), (3,2), (3,3), (2,3), (1,3), (1,2), (0,2), (0,3)]
+        size, distance = 4, 16
+        points = hilbertscan(size, distance)
+        for index, point in enumerate(points):
+            self.assertEqual(point, truth[index])
+        self.assertEqual(index+1, len(truth))
+
     def test_reservoirscan(self):
         random.seed(0)
         truth = [(0,0), (0,5), (2,1), (1,0), (4,1)]

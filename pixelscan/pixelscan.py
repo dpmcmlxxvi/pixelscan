@@ -43,6 +43,18 @@ def manhattan(point1, point2):
 
     return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
 
+def hilbertrot(n, x, y, rx, ry):
+    """
+    Rotates and flips a quadrant appropriately for the Hilbert scan generator
+    Source: https://en.wikipedia.org/wiki/Hilbert_curve
+    """
+    if ry == 0:
+        if rx == 1:
+            x = n - 1 - x
+            y = n - 1 - y
+        return y, x
+    return x, y
+
 # ======================================================================
 # Scan transformations
 # ----------------------------------------------------------------------
@@ -430,6 +442,33 @@ def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
     for y in range(yi, yf + dy, dy):
         for x in range(xi, xf + dx, dx):
             yield x, y
+
+def hilbertscan(size, distance):
+    """
+    Scan pixels in a Hilbert curve pattern in the first quadrant
+    Modified algorithm from https://en.wikipedia.org/wiki/Hilbert_curve
+    :param size: Size of enclosing square
+    :param distance: Distance along curve (Must be smaller than  size**2 - 1)
+    :returns: Coordinate generator
+    """
+
+    size = 2*(1<<(size-1).bit_length());
+    if (distance > size**2 - 1): raise StopIteration("Invalid distance!")
+
+    for d in range(distance):
+        t = d
+        x = 0
+        y = 0
+        s = 1
+        while (s < size):
+            rx = 1 & (t / 2)
+            ry = 1 & (t ^ rx)
+            x, y = hilbertrot(s, x, y, rx, ry)
+            x += s * rx
+            y += s * ry
+            t /= 4
+            s *= 2
+        yield x, y
 
 def ringscan(x0, y0, r1, r2, metric=chebyshev):
     """

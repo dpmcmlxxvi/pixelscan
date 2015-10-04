@@ -2,6 +2,7 @@ function examples
 
     drawscan('circlescan.csv', 'circlescan.png', @chebyshevmap);
     drawscan('gridscan.csv', 'gridscan.png', @gridymap);
+    drawscan('hilbertscan.csv', 'hilbertscan.png', @hilbertmap);
     drawscan('chebyshev.csv', 'chebyshev.png', @chebyshevmap);
     drawscan('manhattan.csv', 'manhattan.png', @manhattanmap);
     drawscan('snakescan.csv', 'snakescan.png', @gridymap);
@@ -114,6 +115,13 @@ function [map] = gridymap(nx, ny)
 
     [~, y] = meshgrid(1:nx, 1:ny);
     map = y;
+
+end
+
+function [map] = hilbertmap(nx, ny)
+
+    [x, y] = meshgrid(1:nx, 1:ny);
+    map = max(ceil(x / 2), ceil(y / 2)) + min(ceil(x / 2), ceil(y / 2));
 
 end
 

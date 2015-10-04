@@ -120,6 +120,28 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   (0,0) (1,0) (2,0) (0,1) (1,1) (2,1) (0,2) (1,2) (2,2)   |
 +------------------------------------+-----------------------------------------------------------+
+|hilbertscan                         |Generates pixels in a Hilbert curve pattern                |
++------------------------------------+-----------------------------------------------------------+
+| .. image:: examples/hilbertscan.png|.. code-block:: python                                     |
+|                                    |                                                           |
+|                                    |   size, distance = 4, 16                                  |
+|                                    |   for x, y in hilbertscan(size, distance):                |
+|                                    |       print x, y                                          |
+|                                    |                                                           |
+|                                    |where                                                      |
+|                                    |                                                           |
+|                                    |.. code-block:: rest                                       |
+|                                    |                                                           |
+|                                    |   size     = Size of enclosing square                     |
+|                                    |   distance = Distance along curve                         |
+|                                    |                                                           |
+|                                    |produces the following points:                             |
+|                                    |                                                           |
+|                                    |.. code-block:: python                                     |
+|                                    |                                                           |
+|                                    |   (0,0), (0,1), (1,1), (1,0), (2,0), (3,0), (3,1), (2,1)  |
+|                                    |   (2,2), (3,2), (3,3), (2,3), (1,3), (1,2), (0,2), (0,3)  |
++------------------------------------+-----------------------------------------------------------+
 |ringscan - chebyshev                |Generates pixels in a ring pattern (squares)               |
 +------------------------------------+-----------------------------------------------------------+
 | .. image:: examples/chebyshev.png  |.. code-block:: python                                     |
