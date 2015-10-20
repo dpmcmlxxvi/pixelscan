@@ -51,7 +51,7 @@ To skip every other pixel a skip transformation can be applied
 
 .. code-block:: python
 
-   for x, y in skip(snap(circlescan(0, 0, 0, 1), step=2)):
+   for x, y in snap(skip(circlescan(0, 0, 0, 1), step=2)):
       print x, y
 
 which will generate the following points
