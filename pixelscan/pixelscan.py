@@ -24,29 +24,34 @@ import sys
 # ----------------------------------------------------------------------
 
 def chebyshev(point1, point2):
-    """
-    Computes distance between points using chebyshev metric
+    """Computes distance between 2D points using chebyshev metric
+
     :param point1: 1st point
+    :type point1: list
     :param point2: 2nd point
+    :type point2: list
     :returns: Distance between point1 and point2
+    :rtype: float
     """
 
     return max(abs(point1[0] - point2[0]), abs(point1[1] - point2[1]))
 
 def manhattan(point1, point2):
-    """
-    Computes distance between points using manhattan metric
+    """Computes distance between 2D points using manhattan metric
+
     :param point1: 1st point
+    :type point1: list
     :param point2: 2nd point
+    :type point2: list
     :returns: Distance between point1 and point2
+    :rtype: float
     """
 
     return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
 
 def hilbertrot(n, x, y, rx, ry):
-    """
-    Rotates and flips a quadrant appropriately for the Hilbert scan generator
-    Source: https://en.wikipedia.org/wiki/Hilbert_curve
+    """Rotates and flips a quadrant appropriately for the Hilbert scan
+    generator. See https://en.wikipedia.org/wiki/Hilbert_curve.
     """
     if ry == 0:
         if rx == 1:
@@ -60,8 +65,7 @@ def hilbertrot(n, x, y, rx, ry):
 # ----------------------------------------------------------------------
 
 class clip(object):
-    """
-    Clip coordinates that exceed boundary
+    """Clip coordinates that exceed boundary
     """
     def __init__(self,
                  scan,
@@ -74,14 +78,21 @@ class clip(object):
 
         """
         :param scan: Pixel scan generator
+        :type scan: function
         :param minx: Minimum x-coordinate (default = -sys.maxint)
+        :type minx: int
         :param maxx: Maximum x-coordinate (default =  sys.maxint)
+        :type maxx: int
         :param miny: Minimum y-coordinate (default = -sys.maxint)
+        :type miny: int
         :param maxy: Maximum y-coordinate (default =  sys.maxint)
+        :type maxy: int
         :param predicate: Optional function that takes 2 arguments (x and y)
                           and returns true if coordinate should be kept
                           otherwise false (default = None)
+        :type predicate: function
         :param abort: Abort iteration if boundary is crossed
+        :type abort: bool
         """
         self.scan = scan
         self.minx = minx
@@ -95,6 +106,8 @@ class clip(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         while True:
             x, y = next(self.scan)
             if self.predicate is not None and not self.predicate(x,y):
@@ -108,14 +121,16 @@ class clip(object):
                 return x, y
 
 class reflection(object):
-    """
-    Reflect coordinates about x and y axes
+    """Reflect coordinates about x and y axes
     """
     def __init__(self, scan, rx=False, ry=False):
         """
         :param scan: Pixel scan generator
+        :type scan: function
         :param rx: True if x-coordinate should be reflected (default=False)
+        :type rx: bool
         :param ry: True if y-coordinate should be reflected (default=False)
+        :type ry: bool
         """
         self.scan = scan
         self.rx = rx
@@ -125,6 +140,8 @@ class reflection(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         x, y = next(self.scan)
         xr = -x if self.rx else x
         yr = -y if self.ry else y
@@ -133,15 +150,16 @@ class reflection(object):
 class reservoir(object):
 
     def __init__(self, scan, npoints):
-        """
-        Randomly sample points using the reservoir sampling method.
+        """Randomly sample points using the reservoir sampling method. This is
+        only useful if you need exactly 'npoints' sampled. Otherwise use the
+        'sample' transformation to randomly sample at a given rate. This method
+        requires storing 'npoints' in memory and precomputing the random
+        selection so it may be slower than 'sample'.
+
         :param scan: Pixel scan generator
+        :type scan: function
         :param npoints: Sample size
-        :warning: This is only useful if you need exactly 'npoints' sampled.
-                  Otherwise use the 'sample' transformation to randomly sample
-                  at a given rate. This method requires storing 'npoints' in
-                  memory and precomputing the random selection so it may be
-                  slower than 'sample'.
+        :type npoints: int
         """
         # Validate inputs
         if npoints <= 0: raise ValueError("Sample size must be positive")
@@ -166,7 +184,8 @@ class reservoir(object):
         return self
 
     def next(self):
-
+        """Next point in iteration
+        """
         if self.count < len(self.reservoir):
             self.count += 1
             return self.reservoir[self.count-1]
@@ -174,17 +193,17 @@ class reservoir(object):
         raise StopIteration("Reservoir exhausted")
 
 class rotation(object):
-    """
-    Rotate coordinates by given angle
+    """Rotate coordinates by given angle. If the final transformation axes do
+    not align with the x and y axes then it may yield duplicate coordinates
+    during scanning.
     """
 
     def __init__(self, scan, angle=0):
         """
         :param scan: Pixel scan generator
+        :type scan: function
         :param angle: Counter-clockwise angle in degrees (default=0)
-        :warning: If the final transformation axes do not align with the x
-                  and y axes then it may yield duplicate coordinates during
-                  scanning.
+        :type angle: float
         """
         self.scan = scan
         self.angle = angle * (math.pi / 180.0)
@@ -193,6 +212,8 @@ class rotation(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         x, y = next(self.scan)
         ca, sa = math.cos(self.angle), math.sin(self.angle)
         xr = ca * x - sa * y
@@ -200,14 +221,14 @@ class rotation(object):
         return xr, yr
 
 class sample(object):
-    """
-    Randomly sample points at the given probability.
+    """Randomly sample points at the given probability.
     """
     def __init__(self, scan, probability=1):
         """
         :param scan: Pixel scan generator
-        :param step: Sampling probability in interval [0,1] (default=1)
-        :warning: Will sample an unknown number of points unless set to 1.
+        :type scan: function
+        :param probability: Sampling probability in interval [0,1] (default=1)
+        :type probability: float
         """
         if probability < 0 or probability > 1:
             raise ValueError("Sampling probability must be in range [0,1]")
@@ -218,6 +239,8 @@ class sample(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         if self.probability == 1:
             x, y = next(self.scan)
         else:
@@ -227,15 +250,17 @@ class sample(object):
         return x, y
 
 class scale(object):
-    """
-    Scale coordinates by given factor
+    """Scale coordinates by given factor
     """
 
     def __init__(self, scan, sx=1, sy=1):
         """
         :param scan: Pixel scan generator
+        :type scan: function
         :param sx: x-coordinate scale factor (default=1)
+        :type sx: float
         :param sy: y-coordinate scale factor (default=1)
+        :type sy: float
         """
         if sx <= 0: raise ValueError("X-scale must be positive")
         if sy <= 0: raise ValueError("Y-scale must be positive")
@@ -247,21 +272,26 @@ class scale(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         x, y = next(self.scan)
         xr = self.sx * x
         yr = self.sy * y
         return xr, yr
 
 class skip(object):
-    """
-    Skip points at the given step size
+    """Skip points at the given step size
     """
     def __init__(self, scan, start=0, stop=sys.maxint, step=1):
         """
         :param scan: Pixel scan generator
+        :type scan: function
         :param start: Iteration starting 0-based index (default = 0)
+        :type start: int
         :param stop: Iteration stopping 0-based index (default = sys.maxint)
+        :type stop: int
         :param step: Iteration step size (default = 1)
+        :type step: int
         """
         if start < 0: raise ValueError("Start must be non-negative")
         if stop < 0: raise ValueError("Stop must be non-negative")
@@ -277,6 +307,8 @@ class skip(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         while True:
             x, y = next(self.scan)
             self.index += 1
@@ -286,12 +318,12 @@ class skip(object):
             return x, y
 
 class snap(object):
-    """
-    Snap x and y coordinates to a grid point
+    """Snap x and y coordinates to a grid point
     """
     def __init__(self, scan):
         """
         :param scan: Pixel scan generator
+        :type scan: function
         """
         self.scan = scan
 
@@ -299,18 +331,20 @@ class snap(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         x, y = next(self.scan)
         xs = int(round(x))
         ys = int(round(y))
         return xs, ys
 
 class swap(object):
-    """
-    Swap x and y coordinates
+    """Swap x and y coordinates
     """
     def __init__(self, scan):
         """
         :param scan: Pixel scan generator
+        :type scan: function
         """
         self.scan = scan
 
@@ -318,19 +352,23 @@ class swap(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         x, y = next(self.scan)
         return y, x
 
 class translation(object):
-    """
-    Translate coordinates by given offset
+    """Translate coordinates by given offset
     """
 
     def __init__(self, scan, tx=0, ty=0):
         """
         :param scan: Pixel scan generator
+        :type scan: function
         :param sx: x-coordinate translation offset (default = 0)
+        :type sx: float
         :param sy: y-coordinate translaation offset (default = 0)
+        :type sy: float
         """
         self.scan = scan
         self.tx = tx
@@ -340,6 +378,8 @@ class translation(object):
         return self
 
     def next(self):
+        """Next point in iteration
+        """
         x, y = next(self.scan)
         xr = x + self.tx
         yr = y + self.ty
@@ -350,13 +390,18 @@ class translation(object):
 # ----------------------------------------------------------------------
 
 def circlescan(x0, y0, r1, r2):
-    """
-    Scan pixels in a circle pattern around a center point
+    """Scan pixels in a circle pattern around a center point
+
     :param x0: Center x-coordinate
+    :type x0: float
     :param y0: Center y-coordinate
+    :type y0: float
     :param r1: Initial radius
+    :type r1: float
     :param r2: Final radius
+    :type r2: float
     :returns: Coordinate generator
+    :rtype: function
     """
 
     # Validate inputs
@@ -421,15 +466,22 @@ def circlescan(x0, y0, r1, r2):
             previous = current
 
 def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
-    """
-    Scan pixels in a grid pattern along the x-coordinate then y-coordinate
+    """Scan pixels in a grid pattern along the x-coordinate then y-coordinate
+
     :param xi: Initial x-coordinate
+    :type xi: int
     :param yi: Initial y-coordinate
+    :type yi: int
     :param xf: Final x-coordinate
+    :type xf: int
     :param yf: Final y-coordinate
+    :type yf: int
     :param stepx: Step size in x-coordinate
+    :type stepx: int
     :param stepy: Step size in y-coordinate
+    :type stepy: int
     :returns: Coordinate generator
+    :rtype: function
     """
 
     if stepx <= 0: raise ValueError("X-step must be positive")
@@ -444,12 +496,15 @@ def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
             yield x, y
 
 def hilbertscan(size, distance):
-    """
-    Scan pixels in a Hilbert curve pattern in the first quadrant
-    Modified algorithm from https://en.wikipedia.org/wiki/Hilbert_curve
+    """Scan pixels in a Hilbert curve pattern in the first quadrant. Modified
+    algorithm from https://en.wikipedia.org/wiki/Hilbert_curve.
+
     :param size: Size of enclosing square
+    :type size: int
     :param distance: Distance along curve (Must be smaller than  size**2 - 1)
+    :type distance: int
     :returns: Coordinate generator
+    :rtype: function
     """
 
     size = 2*(1<<(size-1).bit_length());
@@ -471,14 +526,20 @@ def hilbertscan(size, distance):
         yield x, y
 
 def ringscan(x0, y0, r1, r2, metric=chebyshev):
-    """
-    Scan pixels in a ring pattern around a center point clockwise
+    """Scan pixels in a ring pattern around a center point clockwise
+
     :param x0: Center x-coordinate
+    :type x0: int
     :param y0: Center y-coordinate
+    :type y0: int
     :param r1: Initial radius
+    :type r1: int
     :param r2: Final radius
+    :type r2: int
     :param metric: Distance metric
+    :type metric: function
     :returns: Coordinate generator
+    :rtype: function
     """
 
     # Validate inputs
@@ -543,13 +604,18 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
             break
 
 def snakescan(xi, yi, xf, yf):
-    """
-    Scan pixels in a snake pattern along the x-coordinate then y-coordinate
+    """Scan pixels in a snake pattern along the x-coordinate then y-coordinate
+
     :param xi: Initial x-coordinate
+    :type xi: int
     :param yi: Initial y-coordinate
+    :type yi: int
     :param xf: Final x-coordinate
+    :type xf: int
     :param yf: Final y-coordinate
+    :type yf: int
     :returns: Coordinate generator
+    :rtype: function
     """
 
     # Determine direction to move
@@ -569,18 +635,23 @@ def snakescan(xi, yi, xf, yf):
             xa, xb = xb, xa
 
 def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
-    """
-    Scan pixels in a random walk pattern with given step probabilities
+    """Scan pixels in a random walk pattern with given step probabilities. The
+    random walk will continue indefinitely unless a skip transformation is used
+    with the 'stop' parameter set or a clip transformation is used with the
+    'abort' parameter set to True. The probabilities are normalized to sum to 1.
+
     :param x0: Initial x-coordinate
+    :type x0: int
     :param y0: Initial y-coordinate
+    :type y0: int
     :param xn: Probability of moving in the negative x direction
+    :type xn: float
     :param xp: Probability of moving in the positive x direction
+    :type xp: float
     :param yn: Probability of moving in the negative y direction
+    :type yn: float
     :param yp: Probability of moving in the positive y direction
-    :warning: The random walk will continue indefinitely unless a skip
-              transformation is used with the 'stop' parameter set or
-              a clip transformation is used with the 'abort' parameter set
-              to True. The probabilities are normalized to sum to 1.
+    :type yp: float
     """
 
     # Validate inputs
