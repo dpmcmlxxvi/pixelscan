@@ -1,0 +1,7 @@
+pixelscan.pixelscan module
+==========================
+
+.. automodule:: pixelscan.pixelscan
+    :members:
+    :undoc-members:
+    :show-inheritance:

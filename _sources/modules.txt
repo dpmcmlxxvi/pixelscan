@@ -1,0 +1,7 @@
+pixelscan
+=========
+
+.. toctree::
+   :maxdepth: 4
+
+   pixelscan

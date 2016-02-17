@@ -1,0 +1,17 @@
+pixelscan package
+=================
+
+Submodules
+----------
+
+.. toctree::
+
+   pixelscan.pixelscan
+
+Module contents
+---------------
+
+.. automodule:: pixelscan
+    :members:
+    :undoc-members:
+    :show-inheritance:

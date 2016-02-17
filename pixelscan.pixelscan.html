@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pixelscan.pixelscan module &mdash; pixelscan 0.3.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-3.3.4/css/bootstrap-theme.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="top" title="pixelscan 0.3.2 documentation" href="index.html" />
+    <link rel="up" title="pixelscan package" href="pixelscan.html" />
+    <link rel="prev" title="pixelscan package" href="pixelscan.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head>
+  <body role="document">
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          pixelscan</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3.2</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pixelscan</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">pixelscan.pixelscan module</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">pixelscan.pixelscan module</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="pixelscan.html" title="Previous Chapter: pixelscan package"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; pixelscan packag...</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      
+  <div class="section" id="module-pixelscan.pixelscan">
+<span id="pixelscan-pixelscan-module"></span><h1>pixelscan.pixelscan module<a class="headerlink" href="#module-pixelscan.pixelscan" title="Permalink to this headline">¶</a></h1>
+<p>Various patterns to scan pixels on a grid. Rectangular patterns are scanned
+first along the x-coordinate then the y-coordinate. Radial patterns are
+scanned clockwise. Transformation filters are available to apply
+standard transformations (e.g., rotation, scale, translation) on the
+coordinates.</p>
+<dl class="function">
+<dt id="pixelscan.pixelscan.chebyshev">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">chebyshev</code><span class="sig-paren">(</span><em>point1</em>, <em>point2</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.chebyshev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes distance between 2D points using chebyshev metric</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>point1</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; 1st point</li>
+<li><strong>point2</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; 2nd point</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Distance between point1 and point2</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.circlescan">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">circlescan</code><span class="sig-paren">(</span><em>x0</em>, <em>y0</em>, <em>r1</em>, <em>r2</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.circlescan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan pixels in a circle pattern around a center point</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Center x-coordinate</li>
+<li><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Center y-coordinate</li>
+<li><strong>r1</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Initial radius</li>
+<li><strong>r2</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Final radius</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Coordinate generator</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.clip">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">clip</code><span class="sig-paren">(</span><em>scan</em>, <em>minx=-2147483647</em>, <em>maxx=2147483647</em>, <em>miny=-2147483647</em>, <em>maxy=2147483647</em>, <em>predicate=None</em>, <em>abort=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.clip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Clip coordinates that exceed boundary</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>minx</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Minimum x-coordinate (default = -sys.maxint)</li>
+<li><strong>maxx</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Maximum x-coordinate (default =  sys.maxint)</li>
+<li><strong>miny</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Minimum y-coordinate (default = -sys.maxint)</li>
+<li><strong>maxy</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Maximum y-coordinate (default =  sys.maxint)</li>
+<li><strong>predicate</strong> (<em>function</em>) &#8211; Optional function that takes 2 arguments (x and y)
+and returns true if coordinate should be kept
+otherwise false (default = None)</li>
+<li><strong>abort</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; Abort iteration if boundary is crossed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.clip.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.clip.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.gridscan">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">gridscan</code><span class="sig-paren">(</span><em>xi</em>, <em>yi</em>, <em>xf</em>, <em>yf</em>, <em>stepx=1</em>, <em>stepy=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.gridscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan pixels in a grid pattern along the x-coordinate then y-coordinate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xi</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Initial x-coordinate</li>
+<li><strong>yi</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Initial y-coordinate</li>
+<li><strong>xf</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Final x-coordinate</li>
+<li><strong>yf</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Final y-coordinate</li>
+<li><strong>stepx</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Step size in x-coordinate</li>
+<li><strong>stepy</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Step size in y-coordinate</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Coordinate generator</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.hilbertrot">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">hilbertrot</code><span class="sig-paren">(</span><em>n</em>, <em>x</em>, <em>y</em>, <em>rx</em>, <em>ry</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.hilbertrot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates and flips a quadrant appropriately for the Hilbert scan
+generator. See <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_curve">https://en.wikipedia.org/wiki/Hilbert_curve</a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.hilbertscan">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">hilbertscan</code><span class="sig-paren">(</span><em>size</em>, <em>distance</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.hilbertscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan pixels in a Hilbert curve pattern in the first quadrant. Modified
+algorithm from <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_curve">https://en.wikipedia.org/wiki/Hilbert_curve</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>size</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Size of enclosing square</li>
+<li><strong>distance</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Distance along curve (Must be smaller than  size**2 - 1)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Coordinate generator</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.manhattan">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">manhattan</code><span class="sig-paren">(</span><em>point1</em>, <em>point2</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.manhattan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes distance between 2D points using manhattan metric</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>point1</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; 1st point</li>
+<li><strong>point2</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; 2nd point</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Distance between point1 and point2</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)">float</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.reflection">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">reflection</code><span class="sig-paren">(</span><em>scan</em>, <em>rx=False</em>, <em>ry=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.reflection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Reflect coordinates about x and y axes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>rx</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; True if x-coordinate should be reflected (default=False)</li>
+<li><strong>ry</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) &#8211; True if y-coordinate should be reflected (default=False)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.reflection.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.reflection.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.reservoir">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">reservoir</code><span class="sig-paren">(</span><em>scan</em>, <em>npoints</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.reservoir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Randomly sample points using the reservoir sampling method. This is
+only useful if you need exactly &#8216;npoints&#8217; sampled. Otherwise use the
+&#8216;sample&#8217; transformation to randomly sample at a given rate. This method
+requires storing &#8216;npoints&#8217; in memory and precomputing the random
+selection so it may be slower than &#8216;sample&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>npoints</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Sample size</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.reservoir.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.reservoir.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.ringscan">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">ringscan</code><span class="sig-paren">(</span><em>x0</em>, <em>y0</em>, <em>r1</em>, <em>r2</em>, <em>metric=&lt;function chebyshev at 0x000000000428F0B8&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.ringscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan pixels in a ring pattern around a center point clockwise</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Center x-coordinate</li>
+<li><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Center y-coordinate</li>
+<li><strong>r1</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Initial radius</li>
+<li><strong>r2</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Final radius</li>
+<li><strong>metric</strong> (<em>function</em>) &#8211; Distance metric</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Coordinate generator</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.rotation">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">rotation</code><span class="sig-paren">(</span><em>scan</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.rotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Rotate coordinates by given angle. If the final transformation axes do
+not align with the x and y axes then it may yield duplicate coordinates
+during scanning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>angle</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Counter-clockwise angle in degrees (default=0)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.rotation.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.rotation.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.sample">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">sample</code><span class="sig-paren">(</span><em>scan</em>, <em>probability=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Randomly sample points at the given probability.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>probability</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Sampling probability in interval [0,1] (default=1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.sample.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.sample.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.scale">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">scale</code><span class="sig-paren">(</span><em>scan</em>, <em>sx=1</em>, <em>sy=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Scale coordinates by given factor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>sx</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x-coordinate scale factor (default=1)</li>
+<li><strong>sy</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y-coordinate scale factor (default=1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.scale.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.scale.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.skip">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">skip</code><span class="sig-paren">(</span><em>scan</em>, <em>start=0</em>, <em>stop=2147483647</em>, <em>step=1</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.skip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Skip points at the given step size</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>start</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Iteration starting 0-based index (default = 0)</li>
+<li><strong>stop</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Iteration stopping 0-based index (default = sys.maxint)</li>
+<li><strong>step</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Iteration step size (default = 1)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.skip.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.skip.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.snakescan">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">snakescan</code><span class="sig-paren">(</span><em>xi</em>, <em>yi</em>, <em>xf</em>, <em>yf</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.snakescan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan pixels in a snake pattern along the x-coordinate then y-coordinate</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xi</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Initial x-coordinate</li>
+<li><strong>yi</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Initial y-coordinate</li>
+<li><strong>xf</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Final x-coordinate</li>
+<li><strong>yf</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Final y-coordinate</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Coordinate generator</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.snap">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">snap</code><span class="sig-paren">(</span><em>scan</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.snap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Snap x and y coordinates to a grid point</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.snap.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.snap.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.swap">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">swap</code><span class="sig-paren">(</span><em>scan</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Swap x and y coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.swap.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.swap.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pixelscan.pixelscan.translation">
+<em class="property">class </em><code class="descclassname">pixelscan.pixelscan.</code><code class="descname">translation</code><span class="sig-paren">(</span><em>scan</em>, <em>tx=0</em>, <em>ty=0</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.translation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Translate coordinates by given offset</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>scan</strong> (<em>function</em>) &#8211; Pixel scan generator</li>
+<li><strong>sx</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; x-coordinate translation offset (default = 0)</li>
+<li><strong>sy</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; y-coordinate translaation offset (default = 0)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="pixelscan.pixelscan.translation.next">
+<code class="descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.translation.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Next point in iteration</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="pixelscan.pixelscan.walkscan">
+<code class="descclassname">pixelscan.pixelscan.</code><code class="descname">walkscan</code><span class="sig-paren">(</span><em>x0</em>, <em>y0</em>, <em>xn=0.25</em>, <em>xp=0.25</em>, <em>yn=0.25</em>, <em>yp=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#pixelscan.pixelscan.walkscan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan pixels in a random walk pattern with given step probabilities. The
+random walk will continue indefinitely unless a skip transformation is used
+with the &#8216;stop&#8217; parameter set or a clip transformation is used with the
+&#8216;abort&#8217; parameter set to True. The probabilities are normalized to sum to 1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x0</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Initial x-coordinate</li>
+<li><strong>y0</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; Initial y-coordinate</li>
+<li><strong>xn</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Probability of moving in the negative x direction</li>
+<li><strong>xp</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Probability of moving in the positive x direction</li>
+<li><strong>yn</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Probability of moving in the negative y direction</li>
+<li><strong>yp</strong> (<a class="reference external" href="https://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Probability of moving in the positive y direction</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2016, Daniel Pulido.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.5.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

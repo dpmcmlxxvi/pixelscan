@@ -1,0 +1,28 @@
+.. pixelscan documentation master file, created by
+   sphinx-quickstart on Wed Feb 17 16:41:49 2016.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+**pixelscan**
+=====================================
+
+.. include:: intro.txt
+
+Contents
+==================
+
+.. toctree::
+   :maxdepth: 1
+
+   modules.rst
+   pixelscan.pixelscan.rst
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
