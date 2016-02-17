@@ -23,6 +23,12 @@ the scan generators. Transformation can be chained to yield very generic
 transformations.
 
 ***************
+Documentation
+***************
+
+See the library API documentation `here <http://dpmcmlxxvi.github.io/pixelscan>`_.
+
+***************
 Usage
 ***************
 
