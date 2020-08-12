@@ -45,7 +45,7 @@ from the origin up to a radius of one
 .. code-block:: python
 
    for x, y in snap(circlescan(0, 0, 0, 1)):
-      print x, y
+      print(x, y)
 
 and will generate the following points 
 
@@ -58,7 +58,7 @@ To skip every other pixel a skip transformation can be applied
 .. code-block:: python
 
    for x, y in snap(skip(circlescan(0, 0, 0, 1), step=2)):
-      print x, y
+      print(x, y)
 
 which will generate the following points
 

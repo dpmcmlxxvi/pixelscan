@@ -98,7 +98,7 @@ class TestPixelscan(unittest.TestCase):
 
     def test_reservoirscan(self):
         random.seed(0)
-        truth = [(0,0), (0,5), (2,1), (1,0), (4,1)]
+        truth = [(4,5), (2,0), (1,0), (2,1), (1,4)]
         x0, y0, x1, y1, npoints = 0, 0, 5, 5, 5
         points = reservoir(gridscan(x0, y0, x1, y1), npoints)
         for index, point in enumerate(points):
