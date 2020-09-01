@@ -12,7 +12,7 @@ before_deploy:
   - pip install twine
 deploy:
   provider: pypi
-  user: dpmcmlxxvi
+  user: "__token__"
   password:
     secure: $PYPI_TOKEN
   on:
