@@ -19,7 +19,7 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Multimedia :: Graphics',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Mathematics',
@@ -33,6 +33,6 @@ setup(
     name='pixelscan',
     packages=find_packages(exclude=['tests']),
     url='https://github.com/dpmcmlxxvi/pixelscan',
-    download_url='https://github.com/dpmcmlxxvi/pixelscan/tarball/v0.3.2',
-    version='0.3.2',
+    download_url='https://github.com/dpmcmlxxvi/pixelscan/tarball/v0.4',
+    version='0.4',
 )
