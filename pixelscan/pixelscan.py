@@ -19,9 +19,13 @@ import math
 import random
 import sys
 
+from math import frexp, copysign
+from sys import float_info
+
 # ======================================================================
 # Distance metrics
 # ----------------------------------------------------------------------
+
 
 def chebyshev(point1, point2):
     """Computes distance between 2D points using chebyshev metric
@@ -36,6 +40,7 @@ def chebyshev(point1, point2):
 
     return max(abs(point1[0] - point2[0]), abs(point1[1] - point2[1]))
 
+
 def manhattan(point1, point2):
     """Computes distance between 2D points using manhattan metric
 
@@ -48,6 +53,7 @@ def manhattan(point1, point2):
     """
 
     return abs(point1[0] - point2[0]) + abs(point1[1] - point2[1])
+
 
 def hilbertrot(n, x, y, rx, ry):
     """Rotates and flips a quadrant appropriately for the Hilbert scan
@@ -63,6 +69,7 @@ def hilbertrot(n, x, y, rx, ry):
 # ======================================================================
 # Scan transformations
 # ----------------------------------------------------------------------
+
 
 class clip(object):
     """Clip coordinates that exceed boundary
@@ -110,15 +117,18 @@ class clip(object):
         """
         while True:
             x, y = next(self.scan)
-            if self.predicate is not None and not self.predicate(x,y):
-                if self.abort: raise StopIteration("Boundary crossed!")
+            if self.predicate is not None and not self.predicate(x, y):
+                if self.abort:
+                    raise StopIteration("Boundary crossed!")
             elif (x < self.minx or
-                x > self.maxx or
-                y < self.miny or
-                y > self.maxy):
-                if self.abort: raise StopIteration("Boundary crossed!")
+                  x > self.maxx or
+                  y < self.miny or
+                  y > self.maxy):
+                if self.abort:
+                    raise StopIteration("Boundary crossed!")
             else:
                 return x, y
+
 
 class reflection(object):
     """Reflect coordinates about x and y axes
@@ -147,6 +157,7 @@ class reflection(object):
         yr = -y if self.ry else y
         return xr, yr
 
+
 class reservoir(object):
 
     def __init__(self, scan, npoints):
@@ -162,7 +173,8 @@ class reservoir(object):
         :type npoints: int
         """
         # Validate inputs
-        if npoints <= 0: raise ValueError("Sample size must be positive")
+        if npoints <= 0:
+            raise ValueError("Sample size must be positive")
 
         self.reservoir = []
         self.count = 0
@@ -192,6 +204,7 @@ class reservoir(object):
 
         raise StopIteration("Reservoir exhausted")
 
+
 class rotation(object):
     """Rotate coordinates by given angle. If the final transformation axes do
     not align with the x and y axes then it may yield duplicate coordinates
@@ -220,6 +233,7 @@ class rotation(object):
         yr = sa * x + ca * y
         return xr, yr
 
+
 class sample(object):
     """Randomly sample points at the given probability.
     """
@@ -246,8 +260,10 @@ class sample(object):
         else:
             while True:
                 x, y = next(self.scan)
-                if random.random() <= self.probability: break
+                if random.random() <= self.probability:
+                    break
         return x, y
+
 
 class scale(object):
     """Scale coordinates by given factor
@@ -262,8 +278,10 @@ class scale(object):
         :param sy: y-coordinate scale factor (default=1)
         :type sy: float
         """
-        if sx <= 0: raise ValueError("X-scale must be positive")
-        if sy <= 0: raise ValueError("Y-scale must be positive")
+        if sx <= 0:
+            raise ValueError("X-scale must be positive")
+        if sy <= 0:
+            raise ValueError("Y-scale must be positive")
         self.scan = scan
         self.sx = sx
         self.sy = sy
@@ -279,6 +297,7 @@ class scale(object):
         yr = self.sy * y
         return xr, yr
 
+
 class skip(object):
     """Skip points at the given step size
     """
@@ -293,10 +312,14 @@ class skip(object):
         :param step: Iteration step size (default = 1)
         :type step: int
         """
-        if start < 0: raise ValueError("Start must be non-negative")
-        if stop < 0: raise ValueError("Stop must be non-negative")
-        if stop < start: raise ValueError("Stop must be greater than start")
-        if step <= 0: raise ValueError("Step must be positive")
+        if start < 0:
+            raise ValueError("Start must be non-negative")
+        if stop < 0:
+            raise ValueError("Stop must be non-negative")
+        if stop < start:
+            raise ValueError("Stop must be greater than start")
+        if step <= 0:
+            raise ValueError("Step must be positive")
         self.scan = scan
         self.start = start
         self.stop = stop
@@ -312,10 +335,14 @@ class skip(object):
         while True:
             x, y = next(self.scan)
             self.index += 1
-            if (self.index < self.start): continue
-            if (self.index > self.stop): raise StopIteration("skip stopping")
-            if ((self.index-self.start) % self.step != 0): continue
+            if (self.index < self.start):
+                continue
+            if (self.index > self.stop):
+                raise StopIteration("skip stopping")
+            if ((self.index-self.start) % self.step != 0):
+                continue
             return x, y
+
 
 class snap(object):
     """Snap x and y coordinates to a grid point
@@ -338,6 +365,7 @@ class snap(object):
         ys = int(round(y))
         return xs, ys
 
+
 class swap(object):
     """Swap x and y coordinates
     """
@@ -356,6 +384,7 @@ class swap(object):
         """
         x, y = next(self.scan)
         return y, x
+
 
 class translation(object):
     """Translate coordinates by given offset
@@ -389,6 +418,7 @@ class translation(object):
 # Scan patterns
 # ----------------------------------------------------------------------
 
+
 def circlescan(x0, y0, r1, r2):
     """Scan pixels in a circle pattern around a center point
 
@@ -405,12 +435,14 @@ def circlescan(x0, y0, r1, r2):
     """
 
     # Validate inputs
-    if r1 < 0: raise ValueError("Initial radius must be non-negative")
-    if r2 < 0: raise ValueError("Final radius must be non-negative")
+    if r1 < 0:
+        raise ValueError("Initial radius must be non-negative")
+    if r2 < 0:
+        raise ValueError("Final radius must be non-negative")
 
     # List of pixels visited in previous diameter
     previous = []
-    
+
     # Scan distances outward (1) or inward (-1)
     rstep = 1 if r2 >= r1 else -1
     for distance in range(r1, r2 + rstep, rstep):
@@ -424,14 +456,14 @@ def circlescan(x0, y0, r1, r2):
             # Computes points for first octant and the rotate by multiples of
             # 45 degrees to compute the other octants
             a = 0.707107
-            rotations = {0: [[ 1, 0], [ 0, 1]],
-                         1: [[ a, a], [-a, a]],
-                         2: [[ 0, 1], [-1, 0]],
-                         3: [[-a, a], [-a,-a]],
-                         4: [[-1, 0], [ 0,-1]],
-                         5: [[-a,-a], [ a,-a]],
-                         6: [[ 0,-1], [ 1, 0]],
-                         7: [[ a,-a], [ a, a]]}
+            rotations = {0: [[1, 0], [0, 1]],
+                         1: [[a, a], [-a, a]],
+                         2: [[0, 1], [-1, 0]],
+                         3: [[-a, a], [-a, -a]],
+                         4: [[-1, 0], [0, -1]],
+                         5: [[-a, -a], [a, -a]],
+                         6: [[0, -1], [1, 0]],
+                         7: [[a, -a], [a, a]]}
             nangles = len(rotations)
 
             # List of pixels visited in current diameter
@@ -446,7 +478,7 @@ def circlescan(x0, y0, r1, r2):
                     yr = rotations[angle][1][0]*x + rotations[angle][1][1]*y
                     xr = x0 + xr
                     yr = y0 + yr
-                    
+
                     # First check  if point was in previous diameter
                     # since our scan pattern can lead to duplicates in
                     # neighboring diameters
@@ -464,6 +496,7 @@ def circlescan(x0, y0, r1, r2):
                     x += 1
 
             previous = current
+
 
 def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
     """Scan pixels in a grid pattern along the x-coordinate then y-coordinate
@@ -484,8 +517,10 @@ def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
     :rtype: function
     """
 
-    if stepx <= 0: raise ValueError("X-step must be positive")
-    if stepy <= 0: raise ValueError("Y-step must be positive")
+    if stepx <= 0:
+        raise ValueError("X-step must be positive")
+    if stepy <= 0:
+        raise ValueError("Y-step must be positive")
 
     # Determine direction to move
     dx = stepx if xf >= xi else -stepx
@@ -494,6 +529,7 @@ def gridscan(xi, yi, xf, yf, stepx=1, stepy=1):
     for y in range(yi, yf + dy, dy):
         for x in range(xi, xf + dx, dx):
             yield x, y
+
 
 def hilbertscan(size, distance):
     """Scan pixels in a Hilbert curve pattern in the first quadrant. Modified
@@ -507,8 +543,9 @@ def hilbertscan(size, distance):
     :rtype: function
     """
 
-    size = 2*(1<<(size-1).bit_length())
-    if (distance > size**2 - 1): raise StopIteration("Invalid distance!")
+    size = 2 * (1 << (size-1).bit_length())
+    if (distance > size**2 - 1):
+        raise StopIteration("Invalid distance!")
 
     for d in range(distance):
         t = d
@@ -524,6 +561,7 @@ def hilbertscan(size, distance):
             t /= 4
             s *= 2
         yield x, y
+
 
 def ringscan(x0, y0, r1, r2, metric=chebyshev):
     """Scan pixels in a ring pattern around a center point clockwise
@@ -543,24 +581,27 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
     """
 
     # Validate inputs
-    if r1 < 0: raise ValueError("Initial radius must be non-negative")
-    if r2 < 0: raise ValueError("Final radius must be non-negative")
-    if not hasattr(metric, "__call__"): raise TypeError("Metric not callable")
+    if r1 < 0:
+        raise ValueError("Initial radius must be non-negative")
+    if r2 < 0:
+        raise ValueError("Final radius must be non-negative")
+    if not hasattr(metric, "__call__"):
+        raise TypeError("Metric not callable")
 
     # Define clockwise step directions
     direction = 0
-    steps = {0: [ 1, 0],
-             1: [ 1,-1],
-             2: [ 0,-1],
-             3: [-1,-1],
+    steps = {0: [1, 0],
+             1: [1, -1],
+             2: [0, -1],
+             3: [-1, -1],
              4: [-1, 0],
              5: [-1, 1],
-             6: [ 0, 1],
-             7: [ 1, 1]}
+             6: [0, 1],
+             7: [1, 1]}
     nsteps = len(steps)
 
     center = [x0, y0]
-    
+
     # Scan distances outward (1) or inward (-1)
     rstep = 1 if r2 >= r1 else -1
     for distance in range(r1, r2 + rstep, rstep):
@@ -586,7 +627,7 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
                 ntrys += 1
                 if ntrys == nsteps:
                     break
-                
+
                 # Try the next direction
                 direction = (direction + 1) % nsteps
                 continue
@@ -602,6 +643,7 @@ def ringscan(x0, y0, r1, r2, metric=chebyshev):
         # Check if we tried all step directions and failed
         if ntrys == nsteps:
             break
+
 
 def snakescan(xi, yi, xf, yf):
     """Scan pixels in a snake pattern along the x-coordinate then y-coordinate
@@ -634,11 +676,12 @@ def snakescan(xi, yi, xf, yf):
             dx *= -1
             xa, xb = xb, xa
 
+
 def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
     """Scan pixels in a random walk pattern with given step probabilities. The
     random walk will continue indefinitely unless a skip transformation is used
     with the 'stop' parameter set or a clip transformation is used with the
-    'abort' parameter set to True. The probabilities are normalized to sum to 1.
+    'abort' parameter set to True. The probabilities are normalized to one.
 
     :param x0: Initial x-coordinate
     :type x0: int
@@ -655,10 +698,14 @@ def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
     """
 
     # Validate inputs
-    if xn < 0: raise ValueError("Negative x probabilty must be non-negative")
-    if xp < 0: raise ValueError("Positive x probabilty must be non-negative")
-    if yn < 0: raise ValueError("Negative y probabilty must be non-negative")
-    if yp < 0: raise ValueError("Positive y probabilty must be non-negative")
+    if xn < 0:
+        raise ValueError("Negative x probabilty must be non-negative")
+    if xp < 0:
+        raise ValueError("Positive x probabilty must be non-negative")
+    if yn < 0:
+        raise ValueError("Negative y probabilty must be non-negative")
+    if yp < 0:
+        raise ValueError("Positive y probabilty must be non-negative")
 
     # Compute normalized probability
     total = xp + xn + yp + yn
@@ -691,7 +738,8 @@ def walkscan(x0, y0, xn=0.25, xp=0.25, yn=0.25, yp=0.25):
             y += 1
 
 # Following imported to support floating point bitwise operations in Python 3
-#https://code.activestate.com/recipes/577967-floating-point-bitwise-operations/
+# https://code.activestate.com/recipes/577967-floating-point-bitwise-operations
+
 
 """
 This module defines bitwise operations on floating point numbers by pretending
@@ -700,15 +748,12 @@ to the right. More precisely the infinite string of bits
 b = [...,b[-2],b[-1],b[0],b[1],b[2],...] represents the number
 x = sum( b[i]*2**i for i in range(-inf,inf) ). Negative numbers are represented
 in one's complement. The identity 0.111... == 1.0 creates an ambiquity in the
-representation. To avoid it positive numbers are defined to be padded with zeros
-in both directions while negative numbers are padded with ones in both
+representation. To avoid it positive numbers are defined to be padded with
+zeros in both directions while negative numbers are padded with ones in both
 directions. This choice leads to the useful identity ~a == -a and allows
 +0 == ...000.000... to be the |-identity and -0 == ...111.111... to be the
 &-identity. Unfortunately the choice breaks compatibility with integer bitwise
 operations involving negative numbers."""
-
-from math import frexp, copysign
-from sys import float_info
 
 __author__ = "Pyry Pakkanen"
 __copyright__ = "Copyright 2011"
@@ -719,108 +764,118 @@ __maintainer__ = "Pyry Pakkanen"
 __email__ = "frostburn@suomi24.fi"
 __status__ = "initial release"
 
-fmax, max_exp, max_10_exp, fmin, min_exp, min_10_exp, dig, mant_dig, epsilon, radix, rounds = float_info
+(fmax, max_exp, max_10_exp, fmin, min_exp, min_10_exp, dig, mant_dig, epsilon,
+ radix, rounds) = float_info
+
 
 def ifrexp(x):
     """Get the mantissa and exponent of a floating point number as integers."""
-    m,e = frexp(x)
-    return int(m*2**mant_dig),e
+    m, e = frexp(x)
+    return int(m*2**mant_dig), e
+
 
 def float_not(a):
     """~a"""
     return -a
 
-def float_and(a,b):
+
+def float_and(a, b):
     """a & b"""
-    if a==0.0:
-        if copysign(1.0,a)==1.0:
+    if a == 0.0:
+        if copysign(1.0, a) == 1.0:
             return 0.0
         else:
             return b
-    if b==0.0:
-        return float_and(b,a)
+    if b == 0.0:
+        return float_and(b, a)
 
-    if a<0 and b<0:
-        return -float_or(-a,-b)
+    if a < 0 and b < 0:
+        return -float_or(-a, -b)
 
-    if abs(a)>=abs(b):
-        return float_and_(a,b)
+    if abs(a) >= abs(b):
+        return float_and_(a, b)
     else:
-        return float_and_(b,a)    
+        return float_and_(b, a)
 
-def float_or(a,b):
+
+def float_or(a, b):
     """a | b"""
-    if a==0.0:
-        if copysign(1.0,a)==1.0:
+    if a == 0.0:
+        if copysign(1.0, a) == 1.0:
             return b
         else:
             return -0.0
-    if b==0.0:
-        return float_or(b,a)
+    if b == 0.0:
+        return float_or(b, a)
 
-    if a<0 and b<0:
-        return -float_and(-a,-b)
-        
-    if abs(a)>=abs(b):
-        return float_or_(a,b)
+    if a < 0 and b < 0:
+        return -float_and(-a, -b)
+
+    if abs(a) >= abs(b):
+        return float_or_(a, b)
     else:
-        return float_or_(b,a)
+        return float_or_(b, a)
 
 
-def float_xor(a,b):
+def float_xor(a, b):
     """a ^ b"""
-    if a==0.0:
-        if copysign(1.0,a)==1.0:
+    if a == 0.0:
+        if copysign(1.0, a) == 1.0:
             return b
         else:
             return -b
-    if b==0.0:
-        return float_xor(b,a)
+    if b == 0.0:
+        return float_xor(b, a)
 
-    if a<0:
-        if b<0:
-            return float_xor(-a,-b)
+    if a < 0:
+        if b < 0:
+            return float_xor(-a, -b)
         else:
-            return -float_xor(-a,b)
-    if b<0:
-        return -float_xor(a,-b)
-            
-    if abs(a)>=abs(b):
-        return float_xor_(a,b)
+            return -float_xor(-a, b)
+    if b < 0:
+        return -float_xor(a, -b)
+
+    if abs(a) >= abs(b):
+        return float_xor_(a, b)
     else:
-        return float_xor_(b,a)
+        return float_xor_(b, a)
 
-#The helper functions assume that exponent(a) >= exponent(b).
-#The operation lambda x: ~(-x) converts between two's complement and one's complement representation of a negative number. One's complement is more natural for floating point numbers because the zero is signed.
+# The helper functions assume that exponent(a) >= exponent(b).
+# The operation lambda x: ~(-x) converts between two's complement and one's
+# complement representation of a negative number. One's complement is more
+# natural for floating point numbers because the zero is signed.
 
-def float_and_(a,b):
-    ma,ea = ifrexp(a)
-    mb,eb = ifrexp(b)
 
-    mb = mb>>(ea-eb)
+def float_and_(a, b):
+    ma, ea = ifrexp(a)
+    mb, eb = ifrexp(b)
 
-    if ma<0:
-        return ( mb&~(-ma) )*2**(ea-mant_dig)
-    if mb<0:
-        return ( ~(-mb)&ma )*2**(ea-mant_dig)
-    return ( mb&ma )*2**(ea-mant_dig)
+    mb = mb >> (ea-eb)
 
-def float_or_(a,b):
-    ma,ea = ifrexp(a)
-    mb,eb = ifrexp(b)
+    if ma < 0:
+        return (mb & ~(-ma))*2**(ea-mant_dig)
+    if mb < 0:
+        return (~(-mb) & ma)*2**(ea-mant_dig)
+    return (mb & ma)*2**(ea-mant_dig)
 
-    mb = mb>>(ea-eb)
 
-    if ma<0:
-        return ( -(~( mb|~(-ma) )) )*2**(ea-mant_dig)
-    if mb<0:
-        return ( -(~( ~(-mb)|ma )) )*2**(ea-mant_dig)
-    return ( mb|ma )*2**(ea-mant_dig)
+def float_or_(a, b):
+    ma, ea = ifrexp(a)
+    mb, eb = ifrexp(b)
 
-def float_xor_(a,b):
-    ma,ea = ifrexp(a)
-    mb,eb = ifrexp(b)
+    mb = mb >> (ea-eb)
 
-    mb = mb>>(ea-eb)
+    if ma < 0:
+        return (-(~(mb | ~(-ma))))*2**(ea-mant_dig)
+    if mb < 0:
+        return (-(~(~(-mb) | ma)))*2**(ea-mant_dig)
+    return (mb | ma)*2**(ea-mant_dig)
 
-    return ( mb^ma )*2**(ea-mant_dig)
+
+def float_xor_(a, b):
+    ma, ea = ifrexp(a)
+    mb, eb = ifrexp(b)
+
+    mb = mb >> (ea-eb)
+
+    return (mb ^ ma)*2**(ea-mant_dig)
