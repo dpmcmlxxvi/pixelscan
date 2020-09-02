@@ -30,9 +30,10 @@ setup(
     keywords='distance image metric pixel raster scan',
     license='MIT',
     long_description=long_description,
+    long_description_content_type='text/x-rst',
     name='pixelscan',
     packages=find_packages(exclude=['tests']),
     url='https://github.com/dpmcmlxxvi/pixelscan',
-    download_url='https://github.com/dpmcmlxxvi/pixelscan/tarball/v0.4.3',
-    version='0.4.3',
+    download_url='https://github.com/dpmcmlxxvi/pixelscan/tarball/v0.4.4',
+    version='0.4.4',
 )
