@@ -8,13 +8,3 @@ script:
   - coverage run tests/test.py
 after_success:
   - coveralls
-before_deploy:
-  - pip install twine
-deploy:
-  provider: pypi
-  user: dpmcmlxxvi
-  password:
-    secure: hshJm1HzMU5JZayqe8ial+EnGcE8V88qaVSE+VYqS3niZ2K2x5HseJTOiahT55miurUUxXPQOgCND+eLNRPMxobkZ/lZmj5bpYFq0wMq962fF3PwkQhScUhtohZkfTWOsTQx5B72VELEy82VjArgqIFMluszFKYyhUwbHAZJjUPl+ZKY7LYdfnaJtg2lZSCrS/Hf9H3x/B3ffgqwduMl6PXrjkgrnGISPEJmwePJ+FMRt1MkfHMKcgcK6/lLINUJneZjBxrE9RzdAMHdzGIk/G09UkOsplvSXhb5/D3dXrNUoXbOliow2nXwRNGa71h68nFn4ItLwDFlfgTd0FYCh2hgX5qULEsKkka96UoTAS7hj5OD8xevUABgwduATAzuNPTaA2ZOFp0qu/2ssvQu7sDLLhFX/AVl3qD3NrR/Ip7TGKwADS47YjFGiZ1YFByKiE/XURboWyo9xWJ+HP/00JCa4VuEwl3Q+Vlp8DvmbXoD2VifEceKIMjIXNFvLMYSEWJyTBSUzSMcyz3/nEJ1gph4rv82/tD1MWQT+RAgmYynNiCCqk+KPnJhI9z7S4yqgKkVxdVTjRTVdL6By5f6zFoO3YkXRoJIF21wYw9BNoZ/k472lKnsCPC+83C4owPKYkoze/iohSdbRTI8zCzTJNunCDE0BhVLEYrxbyhMd3Q=
-  on:
-    tags: false
-    repo: dpmcmlxxvi/pixelscan
