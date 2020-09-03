@@ -81,7 +81,7 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   x0, y0, r1, r2 = 0, 0, 0, 2                             |
 |                                    |   for x, y in snap(circlescan(x0, y0, r1, r2)):           |
-|                                    |       print x, y                                          |
+|                                    |       print(x, y)                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
 |                                    |                                                           |
@@ -107,7 +107,7 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   xi, yi, xf, yf = 0, 0, 2, 2                             |
 |                                    |   for x, y in gridscan(xi, yi, xf, yf, stepx=1, stepy=1): |
-|                                    |       print x, y                                          |
+|                                    |       print(x, y)                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
 |                                    |                                                           |
@@ -132,7 +132,7 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   size, distance = 4, 16                                  |
 |                                    |   for x, y in hilbertscan(size, distance):                |
-|                                    |       print x, y                                          |
+|                                    |       print(x, y)                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
 |                                    |                                                           |
@@ -154,7 +154,7 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   x0, y0, r1, r2 = 0, 0, 0, 2                             |
 |                                    |   for x, y in ringscan(x0, y0, r1, r2, metric=chebyshev): |
-|                                    |       print x, y                                          |
+|                                    |       print(x, y)                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
 |                                    |                                                           |
@@ -182,7 +182,7 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   x0, y0, r1, r2 = 0, 0, 0, 2                             |
 |                                    |   for x, y in ringscan(x0, y0, r1, r2, metric=manhattan): |
-|                                    |       print x, y                                          |
+|                                    |       print(x, y)                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
 |                                    |                                                           |
@@ -207,7 +207,7 @@ The following are the currently available generators
 |                                    |                                                           |
 |                                    |   xi, yi, xf, yf = 0, 0, 2, 2                             |
 |                                    |   for x, y in snakescan(xi, yi, xf, yf):                  |
-|                                    |       print x, y                                          |
+|                                    |       print(x, y)                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
 |                                    |                                                           |
@@ -233,7 +233,7 @@ The following are the currently available generators
 |                                    |   x0, y0, = 0, 0                                          |
 |                                    |   for x, y in skip(walkscan(x0, y0, xn=0.25, xp=0.25,     |
 |                                    |                             yn=0.25, yp=0.25), stop=8):   |
-|                                    |       print x, y                                          |
+|                                    |       print(x, y)                                         |
 |                                    |                                                           |
 |                                    |where                                                      |
 |                                    |                                                           |
@@ -438,31 +438,3 @@ Warnings
 Scan Generators such as **circlescan** and Coordinate Transformations such as
 **rotation** can yield non-grid points. They can be snapped to a grid point
 using the **snap** transformation.
-
-***************
-Changelog
-***************
-
-- v0.3.2
-    - Fix deployment token
-
-- v0.3.1
-    - Fix pypi deployment twine bug
-
-- v0.3.0
-    - Switch coverage to coveralls
-    - Clean up code health issues
-    - Fix landscape syntax
-    - Add health and version badges
-    - Fix pylint options syntax
-    - Replace link table with badge links
-
-- v0.2.0
-    - Add clip transformation
-    - Add random walk generator
-    - Replace random generators with reservoir transformation
-    - Add continous integration and testing
-    - Add automated deployment 
-
-- v0.1.0
-   - Initial release
